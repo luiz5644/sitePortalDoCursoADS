@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>paginicial</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    .header {
+      background-color: rgb(255, 255, 255);
+      width: 100%;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 450px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .imagem-header {
+      background-color: transparent;
+      height: 350px;
+      width: 100%;
+      max-width: 80%;
+      margin: 0 auto;
+      min-width: 450px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .imagem-header img {
+      width: 500px;
+      height: 300px;
+    }
+
+    .container-botoes {
+      background-color: rgb(255, 255, 255);
+      width: 100%;
+      max-width: 80%;
+      margin: 0 auto;
+      height: 80px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      min-width: 450px;
+    }
+
+    .botao-container {
+    flex: 1;
+    height: 50px;
+    background-color: #2F5CD0;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    }
+
+
+    .conteudo {
+      width: 100%;
+      max-width: 80%;
+      display: flex;
+      margin: 30px auto;
+      justify-content: space-between;
+      min-width: 450px;
+      gap: 30px;
+    }
+
+    .textos {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .texto-bloco {
+      background-color: #e6eff6;
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    .imagem-lado-direito img {
+      width: 300px;
+      height: auto;
+      border-radius: 5px;
+    }
+
+    .nosso-projetos {
+      width: 100%;
+      max-width: 80%;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      height: 250px;
+      background-color: #2F5CD0;
+      min-width: 450px;
+    }
+    .nosso-projetos>.texto-esquerdo{
+        max-width: 50%;
+        padding: 10px;
+    }
+    .nosso-projetos>.imagem-direita>img{
+        max-width: 300px;
+        min-width: 250px;
+
+        height: 250px; 
+        object-fit: cover; 
+        border-radius: 5px;
+        padding: 10px;
+    }
+
+    .footer {
+      width: 100%;
+      height: auto;
+      padding: 20px;
+      background-color: #e0e0e0;
+      display: grid;
+      min-width: 450px;
+    }
+
+    .rodape {
+      background-color: #2F5CD0;
+      height: 80px;
+      color: white;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 450px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <p>Header</p>
+  </div>
+
+  <div class="imagem-header">
+    <img src="istockphoto-1418786015-612x612.jpg" alt="Imagem">
+  </div>
+
+  <div class="container-botoes">
+    <button class="botao-container">Documento do curso</button>
+    <button class="botao-container">Conheça o campus</button>
+    <button class="botao-container">Matriz curricular</button>
+    <button class="botao-container">Próximos eventos</button>
+  </div>
+
+  <div class="conteudo">
+    <div class="textos">
+      <div class="texto-bloco">
+        <h1>O curso</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae, dolor quidem...</p>
+      </div>
+      <div class="texto-bloco">
+        <h1>Se você gosta</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque possimus facere ut enim vel eligendi ab...</p>
+      </div>
+      <div class="texto-bloco">
+        <h1>E quer aprender</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus quas quos molestias aliquam error consequatur...</p>
+      </div>
+    </div>
+
+    <div class="imagem-lado-direito">
+      <img src="istockphoto-1418786015-612x612.jpg" alt="Imagem">
+    </div>
+  </div>
+
+  <div class="nosso-projetos">
+    <div class="texto-esquerdo">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi eius a optio voluptatem obcaecati totam sapiente commodi vel nesciunt numquam eum eos voluptate qui, libero deserunt quod ratione soluta facere.</p>
+    </div>
+    <div class="imagem-direita">
+
+        <img src="istockphoto-1418786015-612x612.jpg">
+    </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <h1>Footer</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
+    <p>Outro parágrafo...</p>
+  </div>
+
+  <div class="rodape">
+    <h1>Rodapé</h1>
+  </div>
+
+</body>
+</html>
+
+
+
