@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>paginicial</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet"/>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    html, body {
+      width: 100%;
+      overflow-x: hidden;
+    }
+
+    .header {
+      background-color: white;
+      width: 100%;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .imagem-header {
+      background-color: transparent;
+  height: 392px;
+  width: 100%;
+  /* Remova o max-width: 80% */
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+    }
+
+    .imagem-header img {
+      width: 80%;
+  height: 100%; /* Altere para 100% */
+  object-fit: cover;
+    }
+
+    .container-botoes {
+      background-color: white;
+      width: 100%;
+      max-width: 80%;
+      margin: 0 auto;
+      height: 80px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .botao-container {
+      flex: 1;
+      min-width: 120px;
+      height: 50px;
+      background-color: #14339a;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      padding: 5px;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      width: 100%;
+      max-width: 80%;
+      margin: 0 auto;
+      gap: 20px;
+      align-items: stretch;
+    }
+
+    .textos {
+      display: grid;
+      grid-template-rows: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .bloco {
+      background-color: #dbe3eb;
+      padding: 20px;
+      border-radius: 5px;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+    }
+
+    .imagem-meio {
+      height: 100%;
+    }
+
+    .imagem-meio img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 0px;
+    }
+
+    .projetos {
+      display: flex;
+      justify-content: space-between;
+      background-color: #3053c6;
+      border-radius: 5px;
+      padding: 40px;
+      color: white;
+      max-width: 80%;
+      margin: 20px auto;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+    }
+
+    .texto {
+      width: 50%;
+      padding-right: 40px;
+      overflow: auto;
+      max-height: 500px;
+    }
+
+    .imagem-projetos {
+      width: 50%;
+      background-color: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 5px;
+      /* padding: px; */
+    }
+
+    .imagem-projetos img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      border-radius: 5px;
+    }
+
+    .footer {
+      width: 100%;
+      padding: 30px;
+      background-color: #ffffff;
+      display: flex;
+      flex-wrap: wrap;
+      font-size: 16px;
+      margin: 0 auto;
+      border-top: 2px solid #3053c6;
+      
+      
+    }
+
+    .coluna {
+      font-size: 14px;
+      margin: 20px;
+      flex: 1;
+    }
+
+    .rodape {
+      background-color: #14339a;
+      height: 50px;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      font-size: 14px;
+    }
+
+    a {
+      text-decoration: none;
+      color: black;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* RESPONSIVIDADE */
+    @media (max-width: 768px) {
+      .container {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        padding: 20px;
+      }
+
+      .textos {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .imagem-meio {
+        width: 100%;
+        height: auto;
+        order: 2;
+      }
+
+      .imagem-meio img {
+        width: 100%;
+        height: auto;
+      }
+
+      .projetos {
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        text-align: center;
+      }
+
+      .texto, .imagem-projetos {
+        width: 100%;
+        padding-right: 0;
+      }
+
+      .imagem-projetos {
+        margin-top: 20px;
+        padding: 10px;
+        justify-content: center;
+      }
+
+      .footer {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(5, auto);
+        gap: 10px;
+        place-items: center;
+        text-align: center;
+      }
+
+      .coluna {
+        margin: 10px 0;
+        width: 100%;
+        max-width: 300px;
+      }
+
+      .container-botoes {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        /* flex-direction: column; */
+        gap: 10px;
+        padding: 10px;
+        height: auto;
+      }
+
+      .botao-container {
+        width: 100%;
+        max-width: none;
+        margin: 0;
+        /* max-width: 300px; */
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <p>Header</p>
+  </div>
+
+  <div class="imagem-header">
+    <img src="imagem/aulaifce.jpeg" alt="Imagem" />
+  </div>
+
+  <div class="container-botoes">
+    <button class="botao-container">Documento do curso</button>
+    <button class="botao-container">Conheça o campus</button>
+    <button class="botao-container">Matriz curricular</button>
+    <button class="botao-container">Próximos eventos</button>
+  </div>
+
+  <div class="container">
+    <div class="textos">
+      <div class="bloco">
+        <h2>O curso</h2>
+        <p>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA<br>
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA<br>
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</p>
+      </div>
+      <div class="bloco">
+        <h3>Se você gosta</h3>
+        <p>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA<br>
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</p>
+      </div>
+    </div>
+    <div class="imagem-meio">
+      <img src="imagem/aulaifce.jpeg" alt="Imagem exemplo">
+    </div>
+  </div>
+
+  <div class="projetos">
+    <div class="texto">
+      <h2>Nossos projetos</h2>
+      <p>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA<br>
+      AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA<br>
+      AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA<br>
+      AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA<br>
+      AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA<br>
+      AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</p>
+    </div>
+    <div class="imagem-projetos">
+      <img src="imagem/aulaifce.jpeg" alt="Foto dos alunos em sala de aula">
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="coluna"><img src="imagem/logoads.png" alt="" width="180"></div>
+    <div class="coluna"><img src="imagem/logoIFCE.png" alt="" width="180"></div>
+    <div class="coluna">
+      <strong>Navegações</strong>
+      <p><a href="">Início</a></p>
+      <p><a href="">Projetos</a></p>
+      <p><a href="">Matriz curricular</a></p>
+      <p><a href="">Calendário de eventos</a></p>
+      <p><a href="">Conheça o campus</a></p>
+    </div>
+    <div class="coluna">
+      <p><strong>Links úteis</strong></p>
+      <a href="https://ifce.edu.br/tabuleirodonorte">IFCE - Tabuleiro do Norte</a>
+    </div>
+    <div class="coluna"> 
+      <a href="">
+        <strong>Acesso restrito <img width="16" height="16" src="https://img.icons8.com/material-rounded/48/external-link.png" alt="external-link"/></strong>
+      </a>
+    </div>
+  </div>
+
+  <div class="rodape">
+    Copyright 2025 @ <strong>ADS</strong> | Feito por <strong>X</strong>
+  </div>
+
+</body>
+</html>
+
+
+
+
+
