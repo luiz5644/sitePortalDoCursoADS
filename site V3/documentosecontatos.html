@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+
+      html,
+      body {
+        width: 100%;
+        overflow-x: hidden;
+      }
+
+      .header {
+        background-color: white;
+        width: 100%;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      .imagem-header {
+        position: relative;
+        background-color: transparent;
+        height: 392px;
+        width: 90%;
+        display: block;
+        margin: auto;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .imagem-header img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .imagem-header-texto {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        z-index: 2;
+        padding-bottom: 80px;
+      }
+      .imagem-header-texto > img {
+        width: 180px;
+        margin-bottom: 5px;
+        height: auto;
+      }
+
+      .texto-centralizado {
+        color: white;
+        font-size: 24px;
+        font-weight: bold;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+      }
+
+      .conteudo {
+        background-color: transparent;
+        padding: 20px 0;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        width: 90%;
+        margin: 0 auto;
+      }
+
+      .documentos {
+        background-color: #f5f5f5;
+        padding: 20px;
+        border-radius: 8px;
+      }
+
+      .documentos h2 {
+        font-size: 22px;
+        margin-bottom: 20px;
+      }
+
+      .contatos {
+        background-color: #f5f5f5;
+        padding: 20px;
+        border-radius: 8px;
+      }
+
+      .contatos h2 {
+        font-size: 22px;
+        margin-bottom: 20px;
+      }
+      .acesso-rapido {
+        background-color: #dbe3eb;
+        height: 150px;
+        padding: 10px;
+        width: 90%;
+        display: block;
+        margin: auto;
+        border-radius: 10px;
+        margin-bottom: 20px;
+      }
+
+      .acesso-rapido > h2 {
+        padding-top: 10px;
+        padding-left: 60px;
+        margin: auto;
+      }
+
+      .container-botoes2 {
+        background-color: #dbe3eb;
+        width: 90%;
+        margin: 20px auto;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+        justify-items: center;
+        height: auto;
+      }
+
+      .botao-container {
+        background-color: #14339a;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        padding: 10px;
+
+        width: 100%;
+        text-align: center;
+      }
+
+      .footer {
+        width: 100%;
+        padding: 30px;
+        background-color: #ffffff;
+        display: flex;
+        flex-wrap: wrap;
+        font-size: 16px;
+        margin: 0 auto;
+        border-top: 2px solid #3053c6;
+      }
+
+      .coluna {
+        font-size: 14px;
+        margin: 20px;
+        flex: 1;
+      }
+
+      .rodape {
+        background-color: #14339a;
+        height: 50px;
+        color: white;
+        text-align: center;
+        padding: 15px;
+        font-size: 14px;
+      }
+
+      a {
+        text-decoration: none;
+        color: black;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      @media (max-width: 768px) {
+        .conteudo {
+          grid-template-columns: 1fr;
+        }
+
+        .footer {
+          display: grid;
+          grid-template-columns: 1fr;
+          grid-template-rows: repeat(5, auto);
+          gap: 10px;
+          place-items: center;
+          text-align: center;
+        }
+
+        .coluna {
+          margin: 10px 0;
+          width: 100%;
+          max-width: 300px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <p>Documento e contatos</p>
+    </div>
+
+    <div class="imagem-header">
+      <img src="/public/imagem/fundo preto (1).png" alt="Imagem" />
+
+      <div class="imagem-header-texto">
+        <img
+          src="/public/imagem/logoIFCEbrando.png"
+          alt="logo"
+          class="logo-header"
+        />
+        <div class="texto-centralizado">
+          Análise e Desenvolvimento<br />de Sistemas
+        </div>
+      </div>
+    </div>
+
+    <div class="conteudo">
+      <div class="documentos">
+        <h2>Documentos</h2>
+        <!-- cards com documentos -->
+      </div>
+      <div class="contatos">
+        <h2>Contatos</h2>
+        <!-- contatos -->
+      </div>
+    </div>
+
+    <div class="acesso-rapido">
+      <h2>Acesso rápido</h2>
+      <div class="container-botoes2">
+        <button class="botao-container">Documento do curso</button>
+        <button class="botao-container">Conheça o campus</button>
+        <button class="botao-container">Matriz curricular</button>
+        <button class="botao-container">Próximos eventos</button>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="coluna">
+        <img src="imagem/logoads.png" alt="" width="180" />
+      </div>
+      <div class="coluna">
+        <img src="imagem/logoIFCE.png" alt="" width="180" />
+      </div>
+      <div class="coluna">
+        <strong>Navegações</strong>
+        <p><a href="paginainicial.html">Início</a></p>
+        <p><a href="paginaprojetos.html">Projetos</a></p>
+        <p><a href="">Matriz curricular</a></p>
+        <p><a href="calendariodeeventos.html">Calendário de eventos</a></p>
+        <p><a href="">Conheça o campus</a></p>
+      </div>
+      <div class="coluna">
+        <p><strong>Links úteis</strong></p>
+        <a href="https://ifce.edu.br/tabuleirodonorte"
+          >IFCE - Tabuleiro do Norte</a
+        >
+      </div>
+      <div class="coluna">
+        <a href="">
+          <strong
+            >Acesso restrito
+            <img
+              width="16"
+              height="16"
+              src="https://img.icons8.com/material-rounded/48/external-link.png"
+              alt="external-link"
+          /></strong>
+        </a>
+      </div>
+    </div>
+
+    <div class="rodape">
+      Copyright 2025 @ <strong>ADS</strong> | Feito por <strong>X</strong>
+    </div>
+  </body>
+</html>
