@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Documentos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --azul-claro: rgb(48, 83, 198);
+        --azul-escuro: rgb(20, 51, 154);
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+
+      html,
+      body {
+        width: 100%;
+        overflow-x: hidden;
+      }
+
+      .header {
+        background-color: white;
+        width: 100%;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      .imagem-header {
+        position: relative;
+        background-color: transparent;
+        height: 392px;
+        width: 90%;
+        display: block;
+        margin: auto;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+      }
+
+      .imagem-header img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .imagem-header-texto {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        z-index: 2;
+        padding-bottom: 80px;
+      }
+      .imagem-header-texto > img {
+        width: 180px;
+        margin-bottom: 5px;
+        height: auto;
+      }
+
+      .texto-centralizado {
+        color: white;
+        font-size: 24px;
+        font-weight: bold;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+      }
+
+      .conteudo {
+        background-color: transparent;
+        padding: 20px 0;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        width: 90%;
+        margin: 0 auto;
+      }
+
+      .documentos {
+        background-color: #f5f5f5;
+        padding: 20px;
+        border-radius: 8px;
+      }
+
+      .documentos h2 {
+        font-size: 22px;
+        width: 100%;
+        margin-bottom: 10px;
+      }
+      .card-docs {
+        background-color: rgb(255, 255, 255);
+        border-radius: 10px;
+        padding: 15px;
+        height: auto;
+      }
+      .botao-docs {
+        border: none;
+        color: white;
+        background-color: var(--azul-claro);
+        height: 50px;
+        width: 150px;
+        margin-top: 20px;
+        border-radius: 10px;
+      }
+      .botao-docs:hover{
+        background-color: var(--azul-escuro);
+      }
+
+      .contatos {
+        background-color: #f5f5f5;
+        padding: 20px;
+        border-radius: 8px;
+      }
+
+      .contatos h2 {
+        font-size: 22px;
+        margin-bottom: 20px;
+      }
+
+      .card-cont {
+        background-color: rgb(255, 255, 255);
+        border-radius: 10px;
+        padding: 15px;
+        height: auto;
+      }
+
+      .acesso-rapido {
+        background-color: #dbe3eb;
+        padding: 10px;
+        width: 90%;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        display: block;
+        margin: auto;
+      }
+
+      .acesso-rapido > h2 {
+        margin: 0 10px 10px;
+      }
+
+      .container-botoes2 {
+        background-color: #dbe3eb;
+        width: 100%;
+        padding: 0 10px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+      }
+
+      .botao-container {
+        background-color: var(--azul-claro);
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        padding: 10px;
+        height: auto;
+        text-align: center;
+        width: 100%;
+      }
+      .botao-container:hover{
+        background-color: var(--azul-escuro);
+      }
+
+      .footer {
+        width: 100%;
+        padding: 30px;
+        background-color: #ffffff;
+        display: flex;
+        flex-wrap: wrap;
+        font-size: 16px;
+        margin: 0 auto;
+
+        margin-top: 20px;
+        border-top: 2px solid #3053c6;
+      }
+
+      .coluna {
+        font-size: 14px;
+        margin: 20px;
+        flex: 1;
+      }
+
+      .rodape {
+        background-color: #14339a;
+        height: 50px;
+        color: white;
+        text-align: center;
+        padding: 15px;
+        font-size: 14px;
+      }
+
+      a {
+        text-decoration: none;
+        color: black;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      @media (max-width: 768px) {
+        .imagem-header {
+          width: 100%;
+        }
+        .conteudo {
+          grid-template-columns: 1fr;
+        }
+
+        .acesso-rapido {
+          border-radius: 0;
+        }
+        .acesso-rapido {
+          width: 100%;
+          border-radius: 0px;
+          padding: 5px;
+          padding-left: 0px;
+        }
+
+        .container-botoes2 {
+          padding-left: 5px;
+          gap: 5px;
+        }
+
+        .footer {
+          display: grid;
+          grid-template-columns: 1fr;
+          grid-template-rows: repeat(5, auto);
+          gap: 10px;
+          place-items: center;
+          text-align: center;
+          margin: 0 auto;
+        }
+
+        .coluna {
+          margin: 10px 0;
+          width: 100%;
+          max-width: 300px;
+        }
+        a:hover {
+          text-decoration: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <p>Documento e contatos</p>
+    </div>
+
+    <div class="imagem-header">
+      <img src="/public/imagem/fundo preto (1).png" alt="Imagem" />
+
+      <div class="imagem-header-texto">
+        <div class="texto-centralizado">Documentos <br />& Contatos</div>
+      </div>
+    </div>
+
+    <div class="conteudo">
+      <div class="documentos">
+        <h2>Documentos</h2>
+        <div class="card-docs">
+          <p>
+            <strong>PCC</strong><br />
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur
+            illo soluta doloribus animi placeat molestiae. Assumenda maxime
+            iure,
+          </p>
+          <button class="botao-docs">Acessar</button>
+        </div>
+      </div>
+      <div class="contatos">
+        <h2>Contatos</h2>
+        <div class="card-cont">
+          <p>
+            <strong>CCA - Controle Acadêmico</strong
+            ><br />cca.tabuleiro@ifce.edu.br
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="acesso-rapido">
+      <h2>Acesso rápido</h2>
+      <div class="container-botoes2">
+        <!-- <button class="botao-container" onclick="location.href='documentosecontatos.html'">Documentos do curso</button> -->
+        <button class="botao-container" onclick="location.href='campus.html'">
+          <img
+            width="20"
+            height="20"
+            src="https://img.icons8.com/ios-glyphs/30/FFFFFF/book-stack.png"
+            alt="book-stack"
+          />
+
+          Conheça o campus
+        </button>
+
+        <button
+          class="botao-container"
+          onclick="location.href='pagmatriz.html'"
+        >
+          <img
+            width="20"
+            height="20"
+            src="https://img.icons8.com/ios/50/FFFFFF/parse-from-clipboard.png"
+            alt="parse-from-clipboard"
+          />
+          Matrix curricular
+        </button>
+
+        <button
+          class="botao-container"
+          onclick="location.href='calendariodeeventos.html'"
+        >
+          <img
+            width="20"
+            height="20"
+            src="https://img.icons8.com/windows/32/FFFFFF/calendar.png"
+            alt="calendar"
+          />
+
+          Próximos eventos
+        </button>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="coluna">
+        <img src="imagem/logoads.png" alt="" width="180" />
+      </div>
+      <div class="coluna">
+        <img src="imagem/logoIFCE.png" alt="" width="180" />
+      </div>
+      <div class="coluna">
+        <strong>Navegações</strong>
+        <p><a href="paginainicial.html">Início</a></p>
+        <p><a href="paginaprojetos.html">Projetos</a></p>
+        <p><a href="pagmatriz.html">Matriz curricular</a></p>
+        <p><a href="calendariodeeventos.html">Calendário de eventos</a></p>
+        <p><a href="campus.html">Conheça o campus</a></p>
+      </div>
+      <div class="coluna">
+        <p><strong>Links úteis</strong></p>
+        <a href="https://ifce.edu.br/tabuleirodonorte"
+          >IFCE - Tabuleiro do Norte</a
+        >
+      </div>
+      <div class="coluna">
+        <a href="">
+          <strong
+            >Acesso restrito
+            <img
+              width="16"
+              height="16"
+              src="https://img.icons8.com/material-rounded/48/external-link.png"
+              alt="external-link"
+          /></strong>
+        </a>
+      </div>
+    </div>
+
+    <div class="rodape">
+      Copyright 2025 @ <strong>ADS</strong> | Feito por <strong>X</strong>
+    </div>
+  </body>
+</html>

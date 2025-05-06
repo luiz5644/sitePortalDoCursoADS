@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Matriz do curso</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --azul-claro: rgb(48, 83, 198);
+        --azul-escuro: rgb(20, 51, 154);
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+
+      html,
+      body {
+        width: 100%;
+        overflow-x: hidden;
+      }
+
+      .header {
+        background-color: white;
+        width: 100%;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      .container {
+        width: 90%;
+        margin: 0 auto;
+        background-color: rgb(227, 227, 227);
+        padding: 10px;
+        border-radius: 10px;
+      }
+      .container2 {
+        width: 90%;
+        margin: 0 auto;
+        background-color: transparent;
+        padding: 10px;
+        border-radius: 10px;
+      }
+
+      h2 {
+        margin-top: 40px;
+        margin-bottom: 20px;
+        margin-left: 60px;
+        color: #333;
+      }
+
+      .accordion {
+        background-color: #f5f5f5;
+        border-radius: 8px;
+        margin-bottom: 10px;
+        overflow: hidden;
+      }
+
+      .accordion-header {
+        background-color: #ffffff;
+        padding: 15px;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border: none;
+        width: 100%;
+        text-align: left;
+        font-size: 16px;
+      }
+
+      .accordion-header:hover {
+        background-color: #eaeaea;
+      }
+
+      .accordion-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease, padding 0.3s ease;
+        background-color: #f9f9f9;
+        padding: 0 15px;
+      }
+
+      .accordion-content p {
+        padding: 10px 0;
+        margin: 0;
+        font-size: 14px;
+      }
+
+      .arrow {
+        transition: transform 0.3s ease;
+        font-size: 18px;
+      }
+
+      .accordion.active .arrow {
+        transform: rotate(180deg);
+      }
+
+      /* Corpo docente diferente (background azul) */
+      .accordion.docente {
+        background-color: #dce6f5;
+      }
+
+      .accordion.docente .accordion-header {
+        background-color: #dce6f5;
+        padding: 0;
+      }
+
+      .accordion.docente .accordion-header-content {
+        display: flex;
+        align-items: center;
+        width: 100%;
+      }
+
+      .accordion.docente .arrow-box {
+        background-color: var(--azul-claro);
+        color: white;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-top-left-radius: 8px;
+        border-bottom-left-radius: 8px;
+      }
+      .accordion.docente .arrow-box:hover{
+        background-color: var(--azul-escuro);
+      }
+
+      .accordion.docente .text-box {
+        padding: 0 15px;
+        flex-grow: 1;
+        display: flex;
+        align-items: center;
+        font-weight: bold;
+        font-size: 16px;
+      }
+
+      .acesso-rapido {
+        background-color: #dbe3eb;
+        padding: 20px;
+        width: 90%;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        display: block;
+        margin: auto;
+      }
+
+      .acesso-rapido > h2 {
+        margin: 0 10px 10px;
+      }
+
+      .container-botoes2 {
+        background-color: #dbe3eb;
+        width: 100%;
+        padding: 0 10px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 2px;
+      }
+
+      .botao-container {
+        background-color: var(--azul-claro);
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        padding: 10px;
+        height: auto;
+        text-align: center;
+        width: 100%;
+      }
+      .botao-container:hover{
+        background-color: var(--azul-escuro);
+      }
+
+      .footer {
+        width: 100%;
+        padding: 30px;
+        background-color: #ffffff;
+        display: flex;
+        flex-wrap: wrap;
+        font-size: 16px;
+        margin: 0 auto;
+        margin-top: 20px;
+        border-top: 2px solid #3053c6;
+      }
+
+      .coluna {
+        font-size: 14px;
+        margin: 20px;
+        flex: 1;
+      }
+
+      .rodape {
+        background-color: #14339a;
+        height: 50px;
+        color: white;
+        text-align: center;
+        padding: 15px;
+        font-size: 14px;
+      }
+
+      a {
+        text-decoration: none;
+        color: black;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      @media (max-width: 768px) {
+        h2 {
+          margin-left: 25px;
+        }
+
+        .acesso-rapido {
+          width: 100%;
+          border-radius: 0px;
+          padding: 5px;
+          padding-left: 0px;
+        }
+
+        .container-botoes2 {
+          padding-left: 5px;
+          gap: 5px;
+        }
+
+        .footer {
+          display: grid;
+          grid-template-columns: 1fr;
+          grid-template-rows: repeat(5, auto);
+          gap: 10px;
+          place-items: center;
+          text-align: center;
+          margin: 0 auto;
+        }
+
+        .coluna {
+          margin: 10px 0;
+          width: 100%;
+          max-width: 300px;
+        }
+        a:hover {
+          text-decoration: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <p>Pagina Matriz</p>
+    </div>
+
+    <h2>Matriz Curricular</h2>
+    <div class="container">
+      <div class="accordion">
+        <button class="accordion-header">
+          1º Semestre
+          <span class="arrow">⌄</span>
+        </button>
+        <div class="accordion-content">
+          <p>Conteúdo do 1º semestre: Matemática, Programação, Redes...</p>
+        </div>
+      </div>
+
+      <div class="accordion">
+        <button class="accordion-header">
+          2º Semestre
+          <span class="arrow">⌄</span>
+        </button>
+        <div class="accordion-content">
+          <p>
+            Conteúdo do 2º semestre: Banco de Dados, Algoritmos Avançados...
+          </p>
+        </div>
+      </div>
+
+      <div class="accordion">
+        <button class="accordion-header">
+          3º Semestre
+          <span class="arrow">⌄</span>
+        </button>
+        <div class="accordion-content">
+          <p>
+            Conteúdo do 3º semestre: Engenharia de Software, Segurança da
+            Informação...
+          </p>
+        </div>
+      </div>
+
+      <div class="accordion">
+        <button class="accordion-header">
+          4º Semestre
+          <span class="arrow">⌄</span>
+        </button>
+        <div class="accordion-content">
+          <p>
+            Conteúdo do 4º semestre: Desenvolvimento Mobile, Cloud Computing...
+          </p>
+        </div>
+      </div>
+
+      <div class="accordion">
+        <button class="accordion-header">
+          5º Semestre
+          <span class="arrow">⌄</span>
+        </button>
+        <div class="accordion-content">
+          <p>
+            Conteúdo do 5º semestre: TCC, Empreendedorismo, Projetos
+            Inovadores...
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <h2>Corpo Docente</h2>
+    <div class="container2">
+      <div class="accordion docente">
+        <button class="accordion-header">
+          <div class="accordion-header-content">
+            <div class="arrow-box">
+              <span class="arrow">⌄</span>
+            </div>
+            <div class="text-box">Jarbas Nunes Vidal Filho</div>
+          </div>
+        </button>
+        <div class="accordion-content">
+          <p>Professor de Redes e Sistemas Operacionais.</p>
+        </div>
+      </div>
+
+      <div class="accordion docente">
+        <button class="accordion-header">
+          <div class="accordion-header-content">
+            <div class="arrow-box">
+              <span class="arrow">⌄</span>
+            </div>
+            <div class="text-box">Luana Dantas Chagas</div>
+          </div>
+        </button>
+        <div class="accordion-content">
+          <p>Professora de Programação e Banco de Dados.</p>
+        </div>
+      </div>
+
+      <div class="accordion docente">
+        <button class="accordion-header">
+          <div class="accordion-header-content">
+            <div class="arrow-box">
+              <span class="arrow">⌄</span>
+            </div>
+            <div class="text-box">Manoel Marisergio Alves de Oliveira</div>
+          </div>
+        </button>
+        <div class="accordion-content">
+          <p>Professor de Algoritmos e Estruturas de Dados.</p>
+        </div>
+      </div>
+    </div>
+    <div class="acesso-rapido">
+      <h2>Acesso rápido</h2>
+      <div class="container-botoes2">
+        <button
+          class="botao-container"
+          onclick="location.href='documentosecontatos.html'"
+        >
+          <img
+            width="20"
+            height="20"
+            src="https://img.icons8.com/material-outlined/24/FFFFFF/documents--v2.png"
+            alt="documents--v2"
+          />Documentos do curso
+        </button>
+
+        <button class="botao-container" onclick="location.href='campus.html'">
+          <img
+            width="20"
+            height="20"
+            src="https://img.icons8.com/ios-glyphs/30/FFFFFF/book-stack.png"
+            alt="book-stack"
+          />
+
+          Conheça o campus
+        </button>
+        <!-- <button class="botao-container" onclick="location.href='pagmatriz.html'">Matrix curricular</button> -->
+
+        <button
+          class="botao-container"
+          onclick="location.href='calendariodeeventos.html'"
+        >
+          <img
+            width="20"
+            height="20"
+            src="https://img.icons8.com/windows/32/FFFFFF/calendar.png"
+            alt="calendar"
+          />
+          Próximos eventos
+        </button>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="coluna">
+        <img src="imagem/logoads.png" alt="" width="180" />
+      </div>
+      <div class="coluna">
+        <img src="imagem/logoIFCE.png" alt="" width="180" />
+      </div>
+      <div class="coluna">
+        <strong>Navegações</strong>
+        <p><a href="paginainicial.html">Início</a></p>
+        <p><a href="paginaprojetos.html">Projetos</a></p>
+        <p><a href="pagmatriz.html">Matriz curricular</a></p>
+        <p>
+          <a href="calendariodeeventos.html">Calendário de eventos</a>
+        </p>
+        <p><a href="campus.html">Conheça o campus</a></p>
+      </div>
+      <div class="coluna">
+        <p><strong>Links úteis</strong></p>
+        <a href="https://ifce.edu.br/tabuleirodonorte"
+          >IFCE - Tabuleiro do Norte</a
+        >
+      </div>
+      <div class="coluna">
+        <a href="">
+          <strong
+            >Acesso restrito
+            <img
+              width="16"
+              height="16"
+              src="https://img.icons8.com/material-rounded/48/external-link.png"
+              alt="external-link"
+          /></strong>
+        </a>
+      </div>
+    </div>
+
+    <div class="rodape">
+      Copyright 2025 @ <strong>ADS</strong> | Feito por <strong>X</strong>
+    </div>
+
+    <script>
+      const accordions = document.querySelectorAll(".accordion");
+
+      accordions.forEach((acc) => {
+        const header = acc.querySelector(".accordion-header");
+        header.addEventListener("click", () => {
+          acc.classList.toggle("active");
+          const content = acc.querySelector(".accordion-content");
+          if (acc.classList.contains("active")) {
+            content.style.maxHeight = content.scrollHeight + "px";
+            content.style.padding = "5px 10px";
+          } else {
+            content.style.maxHeight = null;
+            content.style.padding = "0 15px";
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
