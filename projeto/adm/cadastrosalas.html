@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cadastro de Sala</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background-color: #f4f4f4;
+      }
+      .container {
+        background-color: white;
+        padding: 25px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        max-width: 500px;
+        margin: 30px auto;
+        border-radius: 8px;
+      }
+      h2 {
+        text-align: center;
+        color: #2c3e50;
+        margin-bottom: 25px;
+      }
+      label {
+        font-size: 14px;
+        color: #555;
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+      }
+      input[type="text"],
+      select,
+      input[type="file"] {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 20px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-sizing: border-box;
+        transition: border 0.3s;
+      }
+      input[type="text"]:focus,
+      select:focus {
+        border-color: #4caf50;
+        outline: none;
+      }
+      input[type="file"] {
+        padding: 8px;
+      }
+      input[type="submit"] {
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        cursor: pointer;
+        border-radius: 4px;
+        font-size: 16px;
+        width: 100%;
+        transition: background-color 0.3s;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+      input[type="submit"]:hover {
+        background-color: #3d8b40;
+      }
+      .form-group {
+        margin-bottom: 5px;
+      }
+      .file-info {
+        font-size: 12px;
+        color: #777;
+        margin-top: -15px;
+        margin-bottom: 15px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Cadastro de Sala</h2>
+      <form
+        action="http://localhost:3000/cadastrar-sala"
+        method="POST"
+        enctype="multipart/form-data"
+      >
+        <div class="form-group">
+          <label for="nome">Nome da Sala:</label>
+          <input
+            type="text"
+            id="nome"
+            name="nome"
+            required
+            placeholder="Ex.: Sala 101"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="localizacao">Localização:</label>
+          <input
+            type="text"
+            id="localizacao"
+            name="localizacao"
+            required
+            placeholder="Ex.: Bloco A, 1º andar"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="tipo">Tipo:</label>
+          <select id="tipo" name="tipo" required>
+            <option value="" disabled selected>Selecione o tipo</option>
+
+            <option value="laboratorio">Laboratório</option>
+            <option value="outras">Outras</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="foto">Foto da Sala:</label>
+          <input type="file" id="foto" name="foto" accept="image/*" required />
+          <p class="file-info">
+            Formatos aceitos: JPG, PNG (Tamanho máximo: 5MB)
+          </p>
+        </div>
+
+        <input type="submit" value="Cadastrar Sala" />
+        <a href="paineldecontrole.html">aqui</a>
+      </form>
+    </div>
+
+    <script>
+      const params = new URLSearchParams(window.location.search);
+      const mensagem = params.get("mensagem");
+
+      if (mensagem === "sucesso") {
+        alert("Sala cadastrada com sucesso!");
+      } else if (mensagem === "erro") {
+        alert("Erro ao cadastrar sala. Tente novamente.");
+      }
+      // Validação simples do formulário antes do envio
+      document
+        .getElementById("formSala")
+        .addEventListener("submit", function (e) {
+          const fileInput = document.getElementById("foto");
+          const file = fileInput.files[0];
+
+          if (file) {
+            const validTypes = ["image/jpeg", "image/png"];
+            const maxSize = 5 * 1024 * 1024; // 5MB
+
+            if (!validTypes.includes(file.type)) {
+              alert("Por favor, selecione uma imagem no formato JPG ou PNG.");
+              e.preventDefault();
+              return;
+            }
+
+            if (file.size > maxSize) {
+              alert("A imagem deve ter no máximo 5MB.");
+              e.preventDefault();
+              return;
+            }
+          }
+
+          // Adicione aqui qualquer outra validação necessária
+        });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Gerenciador</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        display: flex;
+      }
+
+      .sidebar {
+        width: 200px;
+        background-color: #f1f1f1;
+        height: 100vh;
+        padding-top: 20px;
+      }
+
+      .sidebar button {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        padding: 10px 15px;
+        background: none;
+        border: none;
+        text-align: left;
+        cursor: pointer;
+        font-size: 16px;
+      }
+
+      .sidebar button:hover {
+        background-color: #ddd;
+      }
+
+      .sidebar button:focus {
+        background-color: #ccc;
+      }
+
+      .content {
+        flex: 1;
+        padding: 20px;
+      }
+
+      .card {
+        background-color: #e6edf3;
+        padding: 10px;
+        border-radius: 8px;
+        margin-bottom: 10px;
+      }
+
+      .card button {
+        margin-left: 10px;
+        background: none;
+        border: none;
+        cursor: pointer;
+      }
+
+      .top-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+      }
+
+      .top-bar button {
+        background-color: #d0dcea;
+        border: none;
+        padding: 8px 12px;
+        border-radius: 6px;
+        cursor: pointer;
+      }
+
+      .top-bar a {
+        text-decoration: none;
+        color: black;
+      }
+
+      .hidden {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="sidebar">
+      <button onclick="showSection('eventos')">📅 Eventos</button>
+      <button onclick="showSection('projetos')">📚 Projetos</button>
+      <button onclick="showSection('professores')">🧑‍🏫 Professores</button>
+      <button onclick="showSection('salas')">🏛️ Salas</button>
+      <button onclick="showSection('usuarios')">👤 Usuários</button>
+    </div>
+
+    <div class="content">
+      <!-- Eventos -->
+      <div id="eventos" class="section hidden">
+        <div class="top-bar">
+          <h2>Eventos</h2>
+          <button><a href="cadastroevento.html">+ Novo evento</a></button>
+        </div>
+        <div class="card">Evento X <button>✏️</button><button>🗑️</button></div>
+      </div>
+
+      <!-- Projetos -->
+      <div id="projetos" class="section hidden">
+        <div class="top-bar">
+          <h2>Projetos</h2>
+          <button><a href="cadastroprojeto.html">+ Novo projeto</a></button>
+        </div>
+        <div class="card">Projeto A <button>✏️</button><button>🗑️</button></div>
+      </div>
+
+      <!-- Professores -->
+      <div id="professores" class="section hidden">
+        <div class="top-bar">
+          <h2>Professores</h2>
+          <button><a href="cadastroprofessor.html">+ Novo professor</a></button>
+        </div>
+        <div class="card">
+          Professor X <button>✏️</button><button>🗑️</button>
+        </div>
+      </div>
+
+      <!-- Salas -->
+      <div id="salas" class="section hidden">
+        <div class="top-bar">
+          <h2>Salas</h2>
+          <button><a href="cadastrosalas.html">+ Nova sala</a></button>
+        </div>
+        <div id="lista-salas"></div>
+      </div>
+
+      <!-- Usuários -->
+      <div id="usuarios" class="section hidden">
+        <div class="top-bar">
+          <h2>Usuários</h2>
+          <button><a href="cadastroprof.html">+ Novo professor</a></button>
+        </div>
+        <div class="card">Usuário Y <button>✏️</button><button>🗑️</button></div>
+      </div>
+    </div>
+
+    <script>
+      // Alterna entre as seções
+      function showSection(sectionId) {
+        document.querySelectorAll(".section").forEach((section) => {
+          section.classList.add("hidden");
+        });
+        const section = document.getElementById(sectionId);
+        section.classList.remove("hidden");
+
+        if (sectionId === "salas") {
+          carregarSalas();
+        }
+      }
+
+      // Carrega as salas do banco
+      // async function carregarSalas() {
+      //   try {
+      //     const res = await fetch('http://localhost:3000/salas');
+      //     const salas = await res.json();
+      //     const lista = document.getElementById('lista-salas');
+      //     lista.innerHTML = '';
+
+      //     salas.forEach((sala) => {
+      //       const card = document.createElement('div');
+      //       card.className = 'card';
+      //       card.innerHTML = `
+      //         <strong>${sala.nome}</strong> - ${sala.localizacao}
+      //         <button onclick="editarSala('${sala.id || sala._id}')">✏️</button>
+      //         <button onclick="excluirSala('${sala.id || sala._id}')">🗑️</button>
+      //       `;
+      //       lista.appendChild(card);
+      //     });
+      //   } catch (err) {
+      //     console.error('Erro ao carregar salas:', err);
+      //   }
+      // }
+
+      // Exclui uma sala
+      async function excluirSala(id) {
+        const confirmacao = confirm(
+          "Tem certeza que deseja excluir esta sala?"
+        );
+        if (confirmacao) {
+          try {
+            const res = await fetch(`/salas/${id}`, { method: "DELETE" });
+            if (res.ok) {
+              alert("Sala excluída com sucesso!");
+              carregarSalas();
+            } else {
+              alert("Erro ao excluir sala.");
+            }
+          } catch (err) {
+            console.error("Erro ao excluir sala:", err);
+          }
+        }
+      }
+
+      // Exibe a aba de salas assim que a página carregar
+      window.addEventListener("DOMContentLoaded", () => {
+        showSection("salas");
+      });
+    </script>
+  </body>
+</html>

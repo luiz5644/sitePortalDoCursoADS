@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Cadastrar Projeto</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background-color: #1e1e1e;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .card {
+      background-color: white;
+      width: 400px;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      text-align: center;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      font-weight: 600;
+      font-size: 20px;
+    }
+
+    .input-group {
+      margin-bottom: 15px;
+      text-align: left;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 500;
+    }
+
+    input[type="text"],
+    input[type="file"] {
+      width: 100%;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      background-color: #edf2f7;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      background-color: #2f52d2;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #1d3cb8;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h2>Cadastrar Projeto</h2>
+
+    <div class="input-group">
+      <label for="nome">Nome do Projeto</label>
+      <input type="text" id="nome" name="nome">
+    </div>
+
+    <div class="input-group">
+      <label for="descricao">Descrição</label>
+      <input type="text" id="descricao" name="descricao">
+    </div>
+
+    <div class="input-group">
+      <label for="foto">Foto do Projeto</label>
+      <input type="file" id="foto" name="foto" accept="image/*">
+    </div>
+
+    <div class="input-group">
+      <label for="professores">Professor(es) Envolvido(s)</label>
+      <input type="text" id="professores" name="professores">
+    </div>
+
+    <button>Cadastrar Projeto</button>
+  </div>
+
+</body>
+</html>
