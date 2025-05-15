@@ -18,7 +18,6 @@
         --azul-bebe: rgb(204, 239, 255);
         --cinza-claro: rgb(220, 228, 235);
         --cinza-escuro: rgb(52, 58, 64);
-        
       }
       * {
         margin: 0;
@@ -39,8 +38,19 @@
         height: 60px;
         display: flex;
         align-items: center;
-        justify-content: center;
+        padding: 0 20px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      .img-ads {
+        display: flex;
+        align-items: center;
+        width: 80%;
+        margin-left: 50px;
+      }
+
+      .img-ads img {
+        width: 150px;
       }
 
       .imagem-header {
@@ -254,6 +264,9 @@
         font-size: 14px;
         margin: 20px;
         flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
       }
 
       .rodape {
@@ -277,6 +290,9 @@
       @media (max-width: 768px) {
         .imagem-header {
           width: 100%;
+        }
+        .img-ads {
+          margin-left: 5px;
         }
         .container-botoes {
           display: grid;
@@ -393,6 +409,7 @@
           margin: 10px 0;
           width: 100%;
           max-width: 300px;
+          align-items: center;
         }
 
         .container-botoes {
@@ -403,6 +420,9 @@
           height: auto;
           width: 100%;
           text-align: center;
+        }
+        .container-botoes > button {
+          height: 80px;
         }
 
         .botao-container {
@@ -430,7 +450,9 @@
   </head>
   <body>
     <div class="header">
-      <p>Pagina inicial</p>
+      <div class="img-ads">
+        <img src="imagem/logoads.png" alt="Logo ADS" />
+      </div>
     </div>
 
     <div class="imagem-header">
