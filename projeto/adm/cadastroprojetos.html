@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cadastrar Projeto</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-zinc-900 flex items-center justify-center min-h-screen">
+    <div class="bg-white rounded-xl shadow-lg p-8 w-full max-w-md">
+      <h1 class="text-2xl font-bold text-center mb-6">Cadastrar Projeto</h1>
+
+      <form
+        id="formProjeto"
+        action="http://localhost:3000/projetos"
+        method="POST"
+        enctype="multipart/form-data"
+        class="space-y-4"
+      >
+        <div>
+          <label for="nome" class="block font-medium mb-1"
+            >Nome do Projeto</label
+          >
+          <input
+            type="text"
+            id="nome"
+            name="nome"
+            class="w-full px-4 py-2 bg-blue-100 rounded-md focus:outline-none"
+          />
+        </div>
+
+        <div>
+          <label for="sobre" class="block font-medium mb-1">Descrição</label>
+          <textarea
+            id="sobre"
+            name="sobre"
+            type="text"
+            rows="3"
+            class="w-full px-4 py-2 bg-blue-100 rounded-md focus:outline-none"
+          ></textarea>
+        </div>
+        <div>
+          <label for="link" class="block font-medium mb-1"
+            >Link do projeto</label
+          >
+          <input
+            type="text"
+            id="link"
+            name="link"
+            class="w-full px-4 py-2 bg-blue-100 rounded-md focus:outline-none"
+          />
+        </div>
+
+        <div>
+          <label for="foto" class="block font-medium mb-1"
+            >Foto do Projeto</label
+          >
+          <input
+            type="file"
+            id="foto"
+            name="foto"
+            class="w-full px-4 py-2 bg-blue-100 rounded-md focus:outline-none"
+          />
+        </div>
+
+        <button
+          type="submit"
+          class="w-full bg-blue-600 text-white font-semibold py-2 rounded-md hover:bg-blue-700 transition"
+        >
+          Cadastrar Projeto
+        </button>
+      </form>
+    </div>
+  </body>
+
+  <script>
+    document
+      .getElementById("formProjeto")
+      .addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const form = e.target;
+        const formData = new FormData(form);
+
+        try {
+          const response = await fetch("http://localhost:3000/projetos", {
+            method: "POST",
+            body: formData,
+          });
+
+          if (response.ok) {
+            alert("Projeto cadastrado com sucesso!");
+            form.reset(); // limpa os campos
+            // Redireciona ou recarrega
+            window.location.href = window.location.href; // ou: location.reload();
+          } else {
+            const erro = await response.json();
+            alert("Erro ao cadastrar: " + (erro.erro || "Erro desconhecido"));
+          }
+        } catch (err) {
+          console.error(err);
+          alert("Erro na requisição.");
+        }
+      });
+  </script>
+</html>

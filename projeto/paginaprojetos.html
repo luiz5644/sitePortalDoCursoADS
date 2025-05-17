@@ -136,19 +136,7 @@
         margin-bottom: 8px;
       }
 
-      .card-sub {
-        display: flex;
-        margin: 10px;
-        text-align: justify;
-        margin: 10px 10px 10px 0px;
-      }
-      .card-sub > a {
-        background-color: #dce4eb;
-        margin-right: 10px;
-        border-radius: 10px;
-        padding: 10px;
-        text-decoration: none;
-      }
+      
 
       .card-botao-conheça {
         color: white;
@@ -164,6 +152,10 @@
 
       .card-botao-conheça:hover {
         background-color: var(--azul-escuro);
+      }
+      .card-botao-conheça > a{
+        color: white;
+        text-decoration: none;
       }
       .card p {
         background-color: rgba(128, 128, 128, 0.105);
@@ -228,7 +220,7 @@
         flex: 1;
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        /* justify-content: center; */
       }
 
       .rodape {
@@ -335,83 +327,20 @@
     </div>
 
     <!-- coloca os cards aqui -->
-    <div class="section">
-      <div class="card-container">
-        <div class="card">
-          <img src="imagem/devup projeto.jpg" alt="Lab Info I" />
-          <div class="card-content">
-            <div class="card-title"><h2>Dev Up</h2></div>
-            <div class="card-sub">
-              <a href="">professo1</a>
-              <a href="">professo2</a>
-            </div>
-            <p>
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-              Temporibus, dignissimos provident deserunt rem saepe magni
-              similique ipsum distinctio, earum iure, aliquid cumque incidunt
-              consequuntur quasi hic qui. Facilis, iste quaerat!
-            </p>
-            <button class="card-botao-conheça" onclick="location.href='#'">
-              Conheça o projeto
-            </button>
-          </div>
-        </div>
+   <div class="section">
+    <div class="card-container" id="projetos-container">
+      <!-- Os projetos serão carregados aqui dinamicamente -->
+    </div>
+  </div>
 
-        <div class="card">
-          <img src="imagem/devup projeto.jpg" alt="Lab Info I" />
-          <div class="card-content">
-            <div class="card-title"><h2>Dev Up</h2></div>
-            <div class="card-sub">
-              <a href="">professo1</a>
-              <a href="">professo2</a>
-            </div>
-            <p>
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-              Temporibus, dignissimos provident deserunt rem saepe magni
-              similique ipsum distinctio, earum iure, aliquid cumque incidunt
-              consequuntur quasi hic qui. Facilis, iste quaerat!
-            </p>
-            <button class="card-botao-conheça">Conheça o projeto</button>
-          </div>
-        </div>
+        
 
-        <div class="card">
-          <img src="imagem/devup projeto.jpg" alt="Lab Info I" />
-          <div class="card-content">
-            <div class="card-title"><h2>Dev Up</h2></div>
-            <div class="card-sub">
-              <a href="">professo1</a>
-              <a href="">professo2</a>
-            </div>
-            <p>
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-              Temporibus, dignissimos provident deserunt rem saepe magni
-              similique ipsum distinctio, earum iure, aliquid cumque incidunt
-              consequuntur quasi hic qui. Facilis, iste quaerat!
-            </p>
-            <button class="card-botao-conheça">Conheça o projeto</button>
-          </div>
-        </div>
+        
 
-        <div class="card">
-          <img src="imagem/devup projeto.jpg" alt="Lab Info I" />
-          <div class="card-content">
-            <div class="card-title">Dev Up</div>
-            <div class="card-sub">
-              <a href="">professo1</a>
-              <a href="">professo2</a>
-            </div>
-            <p>
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-              Temporibus, dignissimos provident deserunt rem saepe magni
-              similique ipsum distinctio, earum iure, aliquid cumque incidunt
-              consequuntur quasi hic qui. Facilis, iste quaerat!
-            </p>
-            <button class="card-botao-conheça">Conheça o projeto</button>
-          </div>
-        </div>
+        
       </div>
     </div>
+  
 
     <div class="acesso-rapido">
       <h2>Acesso rápido</h2>
@@ -469,7 +398,7 @@
         <img src="imagem/logoads.png" alt="" width="180" />
       </div>
       <div class="coluna">
-        <img src="imagem/logoIFCE.png" alt="" width="180" />
+        <img src="imagem/logoIFCE.png" alt="" width="180" style="margin-top: -40px;" />
       </div>
       <div class="coluna">
         <strong>Navegações</strong>
@@ -488,7 +417,7 @@
       <div class="coluna">
         <a href="">
           <strong
-            >Acesso restrito
+            ><a href="adm/loginadm.html">Acesso restrito</a>
             <img
               width="16"
               height="16"
@@ -503,4 +432,44 @@
       Copyright 2025 @ <strong>ADS</strong> | Feito por <strong>X</strong>
     </div>
   </body>
+
+  <script>
+    async function carregarProjetos() {
+      try {
+        const response = await fetch('http://localhost:3000/projetos');
+        if (!response.ok) throw new Error('Erro ao carregar projetos');
+        const projetos = await response.json();
+
+        const container = document.getElementById('projetos-container');
+        container.innerHTML = ''; // Limpa o container
+
+        projetos.forEach(projeto => {
+          const projetoCard = `
+            <div class="card">
+              ${projeto.foto ? 
+                `<img src="uploads/${projeto.foto}" alt="${projeto.nome}" class="imagem-projeto">` : 
+                `<img src="imagem/devup projeto.jpg" alt="Imagem padrão" class="imagem-projeto">`
+              }
+              <div class="card-content">
+                <div class="card-title"><h2>${projeto.nome || 'Sem título'}</h2></div>
+                <p>${projeto.sobre || 'Sem descrição'}</p>
+                <button class="card-botao-conheça">
+                  <a href="${projeto.link || '#'}" target="_blank">Conheça o projeto</a>
+                </button>
+              </div>
+            </div>
+          `;
+          container.insertAdjacentHTML('beforeend', projetoCard);
+        });
+
+      } catch (erro) {
+        console.error('Erro ao carregar projetos:', erro);
+        document.getElementById('projetos-container').innerHTML = 
+          '<p class="erro-carregamento">Erro ao carregar projetos. Tente novamente mais tarde.</p>';
+      }
+    }
+
+    // Carrega os projetos quando a página é aberta
+    document.addEventListener('DOMContentLoaded', carregarProjetos);
+  </script>
 </html>

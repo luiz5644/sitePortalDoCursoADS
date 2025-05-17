@@ -9,6 +9,7 @@
      body {
   margin: 0;
   font-family: Arial, sans-serif;
+  overflow-x: hidden;
 }
 :root {
         --fundo-card: rgb(220, 228, 235);
@@ -17,18 +18,22 @@
       }
 
 .header {
-  background-color: white;
-  width: 100%;
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 1000;
-}
+        background-color: white;
+        width: 100%;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        padding: 0 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      .img-ads >img {
+        display: flex;
+        align-items: center;
+        /* width: 80%; */
+        margin-left: 0px;
+        height: 32px;
+      }
 
 .main {
   display: flex;
@@ -47,8 +52,9 @@
 
 .content {
   flex: 1;
-  margin-left: 250px; /* Largura da sidebar */
-  padding: 20px;
+  margin-left: 240px; /* Largura da sidebar */
+  margin-top: -30px;
+  /* padding: 5px; */
 }
 
 .sidebar button {
@@ -62,6 +68,28 @@
   cursor: pointer;
   font-size: 16px;
   margin: 5px;
+  margin-bottom: 15px;
+}
+button > img{
+  margin-right: 15px;
+}
+.sidebar > a{
+  background-color: #FF4E4E;
+  color: white;
+  border-radius: 8px;
+  margin-top: 140px;
+  padding: 16px;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  gap: 8px;
+  height: 20px;
+  width: 170px;
+
+}
+.sidebar> .botao-sair:hover{
+  background-color: red;
+  border-radius: 8px;
 }
 
 .sidebar button:hover {
@@ -82,16 +110,38 @@
   margin-bottom: 10px;
 }
 
-.card button {
-  margin-left: 10px;
-  background: none;
-  border: none;
-  cursor: pointer;
+
+.card-buttons {
+    display: flex;
+    align-items: end;
+    gap: 5px; 
+}
+/* Estilização fixa para os botões */
+.beditar {
+    background-color: #4CAF50 !important; /* Verde */
+    color: white !important;
+    border: none;
+    padding: 5px 10px;
+    margin: 5px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.bexcluir {
+    background-color: #f44336 !important; /* Vermelho */
+    color: white !important;
+    border: none;
+    padding: 5px 10px;
+    margin: 5px;
+    border-radius: 3px;
+    cursor: pointer;
 }
 .fundo-card{
     background-color: var(--fundo-card);
     padding: 10px;
     border-radius: 10px;
+    word-wrap: break-word;
+    width: 90%;
 }
 
 .top-bar {
@@ -117,6 +167,19 @@
 .hidden {
   display: none;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
   </style>
   </head>
   
@@ -124,7 +187,7 @@
   <body>
     <div class="header">
       <div class="img-ads">
-        <img src="imagem/logoads.png" alt="Logo ADS" />
+        <img src="/projeto/imagem/logoads.png" alt="Logo ADS" />
       </div>
     </div>
 
@@ -135,34 +198,50 @@
         <button onclick="showSection('professores')"> <img width="30" height="30" src="https://img.icons8.com/ios/50/3053c6/groups.png" alt="groups"/> Professores</button>
         <button onclick="showSection('salas')"> <img width="30" height="30" src="https://img.icons8.com/ios/50/3053c6/university.png" alt="university"/> Salas</button>
         <button onclick="showSection('usuarios')"><img width="30" height="30" src="https://img.icons8.com/small/32/3053c6/user.png" alt="user"/> Usuários</button>
+
+        <a href="/projeto/paginainicial.html" class="botao-sair" style="display: inline-flex; align-items: center; gap: 4px; text-decoration: none; color: inherit;">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-log-out-icon lucide-log-out">
+    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+    <polyline points="16 17 21 12 16 7"/>
+    <line x1="21" x2="9" y1="12" y2="12"/>
+  </svg>
+  sair
+</a>
       </div>
+
+      
 
       <div class="content">
         <!-- Eventos -->
         <div id="eventos" class="section hidden">
-          <div class="top-bar">
-            <button><a href="cadastroevento.html">+ Novo evento</a></button>
-          </div>
-          <div class="fundo-card"><div class="card">Evento X <button>editar</button><button>excluir</button></div></div>
+        <div class="top-bar">
+          <button><a href="cadastroevento.html">+ Novo evento</a></button>
         </div>
+        <div class="fundo-card" id="lista-eventos">
+          <!-- Os cards dos eventos serão inseridos aqui via JS -->
+        </div>
+      </div>
+
 
         <!-- Projetos -->
         <div id="projetos" class="section hidden">
-          <div class="top-bar">
-            <button><a href="cadastroprojeto.html">+ Novo projeto</a></button>
-          </div>
-          <div class="fundo-card">
-            <div class="card">Projeto A <button >editar</button><button >excluir</button></div>
-          </div>
+        <div class="top-bar">
+          <button><a href="cadastroprojetos.html">novo porjeto +</a></button>
         </div>
-
+        <div class="fundo-card">
+   
+      </div>
+    
+      </div>
         <!-- Professores -->
         <div id="professores" class="section hidden">
-          <div class="top-bar">
-            <button><a href="cadastroprofessor.html">+ Novo professor</a></button>
-          </div>
-          <div class="fundo-card"><div class="card">Professor X <button>editar</button><button>excluir</button></div></div>
-        </div>
+      <div class="top-bar">
+        <button><a href="cadastroprofessor.html">+ Novo professor</a></button>
+      </div>
+      <div class="fundo-card">
+        <div id="lista-professores"></div>
+      </div>
+    </div>
 
         <!-- Salas -->
         <div id="salas" class="section hidden">
@@ -175,13 +254,15 @@
         <!-- Usuários -->
         <div id="usuarios" class="section hidden">
           <div class="top-bar">
-            <button><a href="cadastrousuario.html">+ Novo usuário</a></button>
+            
           </div>
-          <div class="fundo-card"><div class="card">Usuário Y <button>editar</button><button>excluir</button></div></div>
+          <div class="fundo-card"><div id="lista-usuarios"></div></div>
         </div>
       </div>
 
       <script>
+
+        
   // Alterna entre as seções
   function showSection(sectionId) {
     document.querySelectorAll(".section").forEach((section) => {
@@ -194,6 +275,165 @@
       carregarSalas();
     }
   }
+
+  // Carrega os eventos do banco
+async function carregarEventos() {
+  try {
+    const res = await fetch('http://localhost:3000/eventos');
+    const eventos = await res.json();
+    const lista = document.querySelector('#eventos .fundo-card');
+    lista.innerHTML = '<div id="lista-eventos"></div>'; // limpa e recria
+
+    const container = document.getElementById('lista-eventos');
+
+    eventos.forEach((evento) => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `
+        <strong>${evento.nome}</strong><br>
+        Data: ${new Date(evento.data).toLocaleDateString('pt-BR')}<br>
+        Sobre: ${evento.sobre || 'sem descrição'}
+        <button class= "beditar" onclick="editarEvento('${evento.id}', '${evento.nome}', '${evento.data}', '${evento.sobre || ''}')">editar</button>
+        <button class= "bexcluir"  onclick="excluirEvento ('${evento.id}')">excluir</button>
+      `;
+      container.appendChild(card);
+    });
+  } catch (err) {
+    console.error('Erro ao carregar eventos:', err);
+  }
+}
+
+// excluir eventos 
+async function excluirEvento(id) {
+  const confirmar = confirm("Tem certeza que deseja excluir este evento?");
+  if (!confirmar) return;
+
+  try {
+    const res = await fetch(`http://localhost:3000/eventos/${id}`, {
+      method: 'DELETE'
+    });
+
+    if (!res.ok) {
+      throw new Error('Erro ao excluir evento');
+    }
+
+    alert('Evento excluído com sucesso.');
+    carregarEventos(); // Atualiza a lista
+  } catch (err) {
+    console.error('Erro ao excluir evento:', err);
+    alert('Erro ao excluir evento.');
+  }
+}
+// eventos 
+// projetos  
+// Carrega os projetos do banco
+async function carregarProjetos() {
+  try {
+    const res = await fetch('http://localhost:3000/projetos');
+    const projetos = await res.json();
+    const lista = document.querySelector('#projetos .fundo-card');
+    lista.innerHTML = '<div id="lista-projetos"></div>'; // limpa e recria a div
+    // console.log(projetos);
+
+    const container = document.getElementById('lista-projetos');
+
+    projetos.forEach((projeto) => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `
+  <strong>${projeto.nome}</strong><br>
+  Descrição: ${projeto.sobre || 'sem descrição'}
+  <button class= "beditar" onclick="editarProjeto('${projeto.nome}', '${projeto.sobre}')">editar</button>
+  <button class= "bexcluir" onclick="excluirProjeto('${projeto.id}')">excluir</button>
+`;
+      container.appendChild(card);
+    });
+  } catch (err) {
+    console.error('Erro ao carregar projetos:', err);
+  }
+}
+
+// excluir projeto 
+async function excluirProjeto(id) {
+  const confirmar = confirm("Tem certeza que deseja excluir este projeto?");
+  if (!confirmar) return;
+
+  try {
+    const res = await fetch(`http://localhost:3000/projetos/${id}`, {
+      method: 'DELETE'
+    });
+
+    if (!res.ok) {
+      throw new Error('Erro ao excluir projeto');
+    }
+
+    alert('Projeto excluído com sucesso.');
+    carregarProjetos(); // Atualiza a lista
+  } catch (err) {
+    console.error('Erro ao excluir projeto:', err);
+    alert('Erro ao excluir projeto.');
+  }
+}
+
+// projetos
+
+
+
+
+
+  
+  
+// professores 
+
+// Carrega os professores do banco
+async function carregarProfessores() {
+  try {
+    const res = await fetch('http://localhost:3000/professores');
+    const professores = await res.json();
+    const lista = document.getElementById('lista-professores');
+    lista.innerHTML = '';
+
+    professores.forEach((prof) => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `
+        <strong>${prof.nome}</strong><br>
+        Email: ${prof.email || 'não informado'}<br>
+        Matéria: ${prof.materia || 'não informada'}
+        <button class= "beditar"  onclick="editarProfessor('${prof.id}', '${prof.nome}', '${prof.email}', '${prof.materia}')">editar</button>
+        <button class= "bexcluir" onclick="excluirProfessor('${prof.id}')">excluir</button>
+      `;
+      lista.appendChild(card);
+    });
+  } catch (err) {
+    console.error('Erro ao carregar professores:', err);
+  }
+}
+
+// excluir professores 
+async function excluirProfessor(id) {
+  const confirmar = confirm("Tem certeza que deseja excluir este professor?");
+  if (!confirmar) return;
+
+  try {
+    const res = await fetch(`http://localhost:3000/professores/${id}`, {
+      method: 'DELETE'
+    });
+
+    if (!res.ok) {
+      throw new Error('Erro ao excluir professor');
+    }
+
+    alert('Professor excluído com sucesso.');
+    carregarProfessores(); // Atualiza a lista
+  } catch (err) {
+    console.error('Erro ao excluir professor:', err);
+    alert('Erro ao excluir professor.');
+  }
+}
+// professores 
+
+
 
   // Carrega as salas do banco
   async function carregarSalas() {
@@ -208,8 +448,8 @@
         card.className = 'card';
         card.innerHTML = `
           <strong>${sala.nome}</strong> - ${sala.localizacao}
-          <button onclick="editarSala('${sala.id || sala._id}', '${sala.nome}', '${sala.localizacao}')">editar</button>
-          <button onclick="excluirSala('${sala.id || sala._id}')">excluir</button>
+          <button class= "beditar"  onclick="editarSala('${sala.id || sala._id}', '${sala.nome}', '${sala.localizacao}')">editar</button>
+          <button class= "bexcluir"  onclick="excluirSala('${sala.id || sala._id}')">excluir</button>
         `;
         lista.appendChild(card);
       });
@@ -234,7 +474,70 @@
       console.error("Erro ao excluir sala:", err);
     }
   }
+  }
+  // salas
+
+  // mostrar usuários cadastrados
+  async function carregarUsuarios() {
+  try {
+    const res = await fetch('http://localhost:3000/usuarios');
+    const usuarios = await res.json();
+    const lista = document.getElementById('lista-usuarios');
+    lista.innerHTML = '';
+
+    usuarios.forEach((usuario) => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      
+
+      card.innerHTML = `
+      <strong>${usuario.email}</strong>
+      
+      <button class= "bexcluir" onclick="excluirUsuario('${usuario.id}')">excluir</button>
+    `;
+      lista.appendChild(card);
+    });
+  } catch (err) {
+    console.error('Erro ao carregar usuários:', err);
+  }
 }
+function showSection(sectionId) {
+  document.querySelectorAll(".section").forEach((section) => {
+    section.classList.add("hidden");
+  });
+  const section = document.getElementById(sectionId);
+  section.classList.remove("hidden");
+
+  if (sectionId === "salas") {
+    carregarSalas();
+  } else if (sectionId === "usuarios") {
+    carregarUsuarios();
+  }
+}
+async function excluirUsuario(id) {
+  const confirmar = confirm("Tem certeza que deseja excluir este usuário?");
+  if (!confirmar) return;
+
+  try {
+    const res = await fetch(`http://localhost:3000/usuarios/${id}`, {
+      method: 'DELETE'
+    });
+
+    if (!res.ok) {
+      throw new Error('Erro ao excluir usuário');
+    }
+
+    alert('Usuário excluído com sucesso.');
+    carregarUsuarios(); // Atualiza a lista
+  } catch (err) {
+    console.error('Erro ao excluir usuário:', err);
+    alert('Erro ao excluir usuário.');
+  }
+}
+
+
+// usuarios 
+  
 
 
 
@@ -242,6 +545,9 @@
   window.addEventListener("DOMContentLoaded", () => {
     showSection("eventos");
     carregarSalas();
+    carregarProfessores();
+    carregarProjetos();
+    carregarEventos();
   });
 </script>
 

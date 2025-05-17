@@ -105,6 +105,10 @@
         margin: 20px auto;
         width: 90%;
       }
+      .section2 {
+        margin: 20px auto;
+        width: 90%;
+      }
       
 
       .card-container {
@@ -203,7 +207,7 @@
         flex: 1;
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        /* justify-content: center; */
       }
 
       .rodape {
@@ -234,11 +238,19 @@
         .section {
           width: 100%;
         } 
+        .section2 {
+          width: 100%;
+        } 
         
         .section > h2 {
           padding-left: 40px;
           padding-bottom: 15px;
         }
+        .section2 > h2 {
+          padding-left: 40px;
+          padding-bottom: 15px;
+        }
+        
         
         .card-container {
           display: grid;
@@ -306,31 +318,18 @@
       </div>
     </div>
     <div class="section">
-      <h2>Laboratórios</h2>
-      <div class="card-container">
-        <div class="card">
-          <img src="imagem/testeprojetosimg.jpg" alt="Lab Info I" />
-          <div class="card-content">
-            <div class="card-title">titulo</div>
-            <div class="card-location">Local</div>
-          </div>
-        </div>
-      </div>
-    </div>
+  <h2>Laboratórios</h2>
+  <div class="card-container" id="containerLaboratorios">
+    <!-- Os cards de laboratórios serão inseridos aqui -->
+  </div>
+</div>
 
-    <div class="section">
-      <h2>Outras salas</h2>
-      <div class="card-container">
-        <div class="card">
-          <img src="imagem" alt="Lab Info I" />
-          <div class="card-content">
-            <div class="card-title">nome</div>
-            <div class="card-location">Local</div>
-          </div>
-        </div>
-        </div>
-      </div>
-    </div>
+<div class="section2">
+  <h2>Outras salas</h2>
+  <div class="card-container" id="containerOutrasSalas">
+    <!-- Os cards de outras salas serão inseridos aqui -->
+  </div>
+</div>
     <div class="acesso-rapido">
       <h2>Acesso rápido</h2>
       <div class="container-botoes2">
@@ -382,7 +381,7 @@
         <img src="imagem/logoads.png" alt="" width="180" />
       </div>
       <div class="coluna">
-        <img src="imagem/logoIFCE.png" alt="" width="180" />
+        <img src="imagem/logoIFCE.png" alt="" width="180" style="margin-top: -40px;" />
       </div>
       <div class="coluna">
         <strong>Navegações</strong>
@@ -401,7 +400,7 @@
       <div class="coluna">
         <a href="">
           <strong
-            >Acesso restrito
+            ><a href="adm/loginadm.html">Acesso restrito</a>
             <img
               width="16"
               height="16"
@@ -417,38 +416,41 @@
     </div>
   </body>
   <script>
-    async function carregarSalas() {
+  async function carregarSalas() {
+    const containerLabs = document.getElementById("containerLaboratorios");
+    const containerOutros = document.getElementById("containerOutrasSalas");
+
     try {
-      const response = await fetch('/salas');
-      const salas = await response.json();
+      const resposta = await fetch('http://localhost:3000/salas');
+      const salas = await resposta.json();
 
-      const containerLaboratorios = document.querySelector('.section:nth-of-type(1) .card-container');
-      const containerOutrasSalas = document.querySelector('.section:nth-of-type(2) .card-container');
-
-      salas.forEach((sala) => {
-        const card = document.createElement('div');
-        card.classList.add('card');
-
-        card.innerHTML = `
-          <img src="${sala.foto || 'imagem/imagem_padrao.jpg'}" alt="${sala.nome}" />
+      salas.forEach(sala => {
+        const div = document.createElement("div");
+        div.className = "card";
+        div.innerHTML = `
+          <img src="${sala.foto}" alt="${sala.nome}" />
           <div class="card-content">
             <div class="card-title">${sala.nome}</div>
             <div class="card-location">${sala.localizacao}</div>
           </div>
         `;
 
-        // Critério de divisão: exemplo (mude se quiser)
-        if (sala.nome.toLowerCase().includes('laboratório')) {
-          containerLaboratorios.appendChild(card);
+        if (sala.tipo.toLowerCase() === "laboratório" || sala.tipo.toLowerCase() === "laboratorio") {
+          containerLabs.appendChild(div);
         } else {
-          containerOutrasSalas.appendChild(card);
+          containerOutros.appendChild(div);
         }
       });
-    } catch (error) {
-      console.error('Erro ao carregar salas:', error);
+
+    } catch (erro) {
+      console.error("Erro ao carregar salas:", erro);
+      containerLabs.innerHTML = "<p>Erro ao carregar laboratórios.</p>";
+      containerOutros.innerHTML = "<p>Erro ao carregar outras salas.</p>";
     }
   }
 
-  document.addEventListener('DOMContentLoaded', carregarSalas);
-  </script>
+  // Chama a função ao abrir a página
+  carregarSalas();
+</script>
+
 </html>

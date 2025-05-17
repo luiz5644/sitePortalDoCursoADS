@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cadastrar Professor</title>
+    <style>
+      /* Reset e base */
+      * {
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+      body {
+        background-color: #181818;
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      /* Container do formulário */
+      .form-container {
+        background: white;
+        padding: 2.5rem 2rem;
+        border-radius: 12px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        width: 100%;
+        max-width: 400px;
+      }
+
+      /* Título */
+      .form-container h1 {
+        text-align: center;
+        font-weight: 700;
+        font-size: 1.6rem;
+        margin-bottom: 2rem;
+        color: #111;
+      }
+
+      /* Labels */
+      label {
+        display: block;
+        margin-bottom: 0.4rem;
+        font-weight: 600;
+        color: #222;
+      }
+
+      /* Inputs */
+      input[type="text"],
+      input[type="email"] {
+        width: 100%;
+        padding: 10px 14px;
+        border-radius: 8px;
+        border: none;
+        background-color: #e6ecf1;
+        font-size: 1rem;
+        transition: background-color 0.3s ease;
+      }
+
+      input[type="text"]:focus,
+      input[type="email"]:focus {
+        background-color: #cbd9f4;
+        outline: none;
+      }
+
+      /* Botão */
+      button {
+        margin-top: 1.5rem;
+        width: 100%;
+        background-color: #355bd6;
+        border: none;
+        border-radius: 10px;
+        padding: 12px 0;
+        font-size: 1rem;
+        font-weight: 700;
+        color: white;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      button:hover {
+        background-color: #2b4bb5;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="form-container">
+      <h1>Cadastrar Professor</h1>
+
+      <form
+        id="formProfessor"
+        action="http://localhost:3000/professores"
+        method="POST"
+        enctype="multipart/form-data"
+        class="space-y-4"
+      >
+        <label for="nome">Nome</label>
+        <input type="text" id="nome" name="nome" required />
+
+        <label for="email">E-mail</label>
+        <input type="email" id="email" name="email" required />
+
+        <label for="materia">Área de Formação</label>
+        <input type="text" id="materia" name="materia" required />
+
+        <button type="submit">Cadastrar Professor</button>
+      </form>
+    </div>
+  </body>
+
+  <script>
+    document
+      .getElementById("formProfessor")
+      .addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const form = e.target;
+        const formData = new FormData(form);
+
+        try {
+          const response = await fetch("http://localhost:3000/professores", {
+            method: "POST",
+            body: formData,
+          });
+
+          if (response.ok) {
+            alert("Professor cadastrado com sucesso!");
+            form.reset(); // limpa os campos
+            // Redireciona ou recarrega
+            window.location.href = window.location.href; // ou: location.reload();
+          } else {
+            const erro = await response.json();
+            alert("Erro ao cadastrar: " + (erro.erro || "Erro desconhecido"));
+          }
+        } catch (err) {
+          console.error(err);
+          alert("Erro na requisição.");
+        }
+      });
+  </script>
+</html>

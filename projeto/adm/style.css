@@ -6,7 +6,7 @@
 }
 
 body {
-  background: #fff;
+  background: #d5d4d497;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -14,9 +14,15 @@ body {
   padding: 20px;
 }
 
+
 .container {
   width: 100%;
   max-width: 400px;
+  /* border: solid 2px black; */
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .logo {
@@ -75,7 +81,7 @@ button {
   font-size: 1rem;
   font-weight: bold;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition:  0.3s ease;
 }
 
 button:hover {
@@ -84,6 +90,7 @@ button:hover {
 
 /* Responsivo */
 @media (max-width: 480px) {
+  
   button {
     padding: 14px;
     font-size: 0.95rem;
