@@ -5,6 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Portal do Curso ADS</title>
     <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+    </style>
   </head>
   <body>
     <div class="container">
@@ -12,16 +24,12 @@
         <img src="/projeto/imagem/logoads.png" width="256px" alt="Logo ADS" />
       </div>
 
-      <form
-        class="formulario"
-        action="http://localhost:3000/login"
-        method="POST"
-      >
+      <form id="loginForm" class="formulario">
         <div class="form-group">
           <label for="email">Email</label>
           <div class="input-group">
             <span class="icon">
-              <!-- Ícone de e-mail -->
+       
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
@@ -51,7 +59,7 @@
           <label for="senha">Senha</label>
           <div class="input-group">
             <span class="icon">
-              <!-- Ícone de senha -->
+            
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
@@ -80,5 +88,41 @@
         <button type="submit">Entrar</button>
       </form>
     </div>
+
+    <script>
+      const form = document.querySelector("form");
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(form);
+        const data = {
+          email: formData.get("email"),
+          senha: formData.get("senha"),
+        };
+
+        try {
+          const response = await fetch("http://localhost:3000/login", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+          });
+
+          const resultado = await response.json();
+
+          if (response.ok) {
+            alert("Login realizado com sucesso!");
+            window.location.href = "paineldecontrole.html"; 
+          } else {
+            alert(resultado.erro || "Erro ao fazer login.");
+          }
+        } catch (error) {
+          alert("Erro ao conectar com o servidor.");
+          console.error(error);
+        }
+      });
+    </script>
   </body>
 </html>

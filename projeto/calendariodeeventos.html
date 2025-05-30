@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -236,7 +236,6 @@
 
     <div class="calendario-eventos" id="calendario">
       <h2>Calendário de eventos</h2>
-     
     </div>
 
     <div class="acesso-rapido">
@@ -330,27 +329,26 @@
 
           const calendario = document.getElementById("calendario");
 
-         eventos.forEach(evento => {
-  const dataObj = new Date(evento.data);
-  const dia = dataObj.getDate().toString().padStart(2, "0");
-  const mes = (dataObj.getMonth() + 1).toString().padStart(2, "0");
-  const ano = dataObj.getFullYear();
-  const dataFormatada = `${dia}/${mes}/${ano}`;
+          eventos.forEach((evento) => {
+            const dataObj = new Date(evento.data);
+            const dia = dataObj.getDate().toString().padStart(2, "0");
+            const mes = (dataObj.getMonth() + 1).toString().padStart(2, "0");
+            const ano = dataObj.getFullYear();
+            // const dataFormatada = `${data}`;
 
-  const divEvento = document.createElement("div");
-  divEvento.className = "evento";
-  divEvento.innerHTML = `
+            const divEvento = document.createElement("div");
+            divEvento.className = "evento";
+            divEvento.innerHTML = `
     <div class="data">
-      <span class="dia">${dataFormatada}</span>
+      <span class="dia">${evento.data}</span>
     </div>
     <div class="sobre">
       <strong>${evento.nome}</strong>
       <p>${evento.sobre}</p>
     </div>
   `;
-  calendario.appendChild(divEvento);
-});
-
+            calendario.appendChild(divEvento);
+          });
         } catch (erro) {
           console.error("Erro ao carregar eventos:", erro);
         }
@@ -360,4 +358,3 @@
     </script>
   </body>
 </html>
-

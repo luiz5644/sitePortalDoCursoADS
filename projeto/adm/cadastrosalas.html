@@ -1,15 +1,32 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cadastro de Sala</title>
+    <title>Cadastro de salas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+      rel="stylesheet"
+    />
     <style>
+      * {
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+      :root {
+        --azul-claro: rgb(48, 83, 198);
+        --azul-escuro: rgb(20, 51, 154);
+        --azul-bebe: rgb(204, 239, 255);
+        --cinza-claro: rgb(220, 228, 235);
+        --cinza-escuro: rgb(52, 58, 64);
+      }
       body {
         font-family: Arial, sans-serif;
         margin: 0;
         padding: 20px;
-        background-color: #181818; /* Fundo escuro igual ao da imagem */
+        background-color: #181818; 
       }
       .container {
         background-color: white;
@@ -17,18 +34,18 @@
         box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
         max-width: 450px;
         margin: 50px auto;
-        border-radius: 12px;
+        border-radius: 10px;
       }
       h2 {
         text-align: center;
-        color: #000; /* Texto preto */
+        color: #000; 
         margin-bottom: 30px;
         font-weight: 700;
         font-size: 22px;
       }
       label {
         font-size: 15px;
-        color: #222;
+        color: #000000;
         display: block;
         margin-bottom: 10px;
         font-weight: 500;
@@ -38,9 +55,9 @@
       input[type="file"] {
         width: 100%;
         padding: 14px 15px;
-        margin-bottom: 25px;
+        margin-bottom: 15px;
         border: none;
-        background-color: #e8eef5; /* Fundo cinza claro igual aos inputs da imagem */
+        background-color: var(--cinza-claro);
         border-radius: 8px;
         box-sizing: border-box;
         font-size: 15px;
@@ -49,15 +66,15 @@
       }
       input[type="text"]:focus,
       select:focus {
-        background-color: #d7e0f2;
+        background-color: var(--cinza-claro);
         outline: none;
-        box-shadow: 0 0 8px #3f72af;
+       
       }
       input[type="file"] {
         padding: 10px 12px;
       }
       input[type="submit"] {
-        background-color: #3f72af; /* Azul forte */
+        background-color: var(--azul-escuro);
         color: white;
         border: none;
         padding: 15px;
@@ -66,27 +83,27 @@
         font-size: 16px;
         width: 100%;
         font-weight: 700;
-        transition: background-color 0.3s;
+
         letter-spacing: 0.8px;
+        transition: background-color 0.3s ease;
       }
       input[type="submit"]:hover {
-        background-color: #2c5491;
+        background-color: var(--azul-claro);
       }
-      .form-group {
-        margin-bottom: 15px;
-      }
+      
+      
       .file-info {
         font-size: 12px;
-        color: #555;
-        margin-top: -20px;
-        margin-bottom: 20px;
+        color: #000000;
+        margin-top: -10px;
+        margin-bottom: 15px;
       }
       a {
         display: block;
         margin-top: 12px;
         text-align: center;
         font-weight: 600;
-        color: #3f72af;
+        color: var(--azul-escuro);
         text-decoration: none;
       }
       a:hover {
@@ -102,7 +119,7 @@
         method="POST"
         enctype="multipart/form-data"
       >
-        <div class="form-group">
+      
           <label for="nome">Nome da Sala:</label>
           <input
             type="text"
@@ -111,9 +128,9 @@
             required
             placeholder="Ex.: Sala 101"
           />
-        </div>
+       
 
-        <div class="form-group">
+     
           <label for="localizacao">Localização:</label>
           <input
             type="text"
@@ -122,9 +139,9 @@
             required
             placeholder="Ex.: Bloco A, 1º andar"
           />
-        </div>
+      
 
-        <div class="form-group">
+        
           <label for="tipo">Tipo:</label>
           <select id="tipo" name="tipo" required>
             <option value="" disabled selected>Selecione o tipo</option>
@@ -132,18 +149,19 @@
             <option value="laboratorio">Laboratório</option>
             <option value="outras">Outras</option>
           </select>
-        </div>
+      
 
-        <div class="form-group">
+       
           <label for="foto">Foto da Sala:</label>
           <input type="file" id="foto" name="foto" accept="image/*" required />
           <p class="file-info">
             Formatos aceitos: JPG, PNG (Tamanho máximo: 5MB)
           </p>
-        </div>
+     
 
         <input type="submit" value="Cadastrar Sala" />
-        <a href="paineldecontrole.html">aqui</a>
+
+        <a href="paineldecontrole.html">Cancelar</a>
       </form>
     </div>
 
@@ -156,7 +174,7 @@
       } else if (mensagem === "erro") {
         alert("Erro ao cadastrar sala. Tente novamente.");
       }
-      // Validação do formulário antes do envio
+     
       document
         .getElementById("formSala")
         .addEventListener("submit", function (e) {
@@ -165,7 +183,7 @@
 
           if (file) {
             const validTypes = ["image/jpeg", "image/png"];
-            const maxSize = 5 * 1024 * 1024; // 5MB
+            const maxSize = 5 * 1024 * 1024; 
 
             if (!validTypes.includes(file.type)) {
               alert("Por favor, selecione uma imagem no formato JPG ou PNG.");

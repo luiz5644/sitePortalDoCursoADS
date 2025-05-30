@@ -1,106 +1,171 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cadastrar Projeto</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Cadastrar de projetos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+      :root {
+        --azul-claro: rgb(48, 83, 198);
+        --azul-escuro: rgb(20, 51, 154);
+        --azul-bebe: rgb(204, 239, 255);
+        --cinza-claro: rgb(220, 228, 235);
+        --cinza-escuro: rgb(52, 58, 64);
+        --fundo-body: #181818;
+      }
+
+      body {
+        background-color: var(--fundo-body);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+        padding: 20px;
+      }
+
+      .container {
+        background-color: #ffffff;
+        padding: 30px 40px;
+        margin: 50px auto;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        width: 100%;
+        max-width: 450px;
+      }
+
+      h1 {
+        text-align: center;
+        font-size: 1.75rem;
+        margin-bottom: 30px;
+        font-weight: 700;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: 500;
+      }
+
+      input[type="text"],
+      input[type="file"],
+      textarea {
+        width: 100%;
+        padding: 14px 15px;
+        margin-bottom: 15px;
+        background-color: var(--cinza-claro);
+        border: none;
+        border-radius: 8px;
+        
+        font-size: 1rem;
+        outline: none;
+      }
+
+      textarea {
+        resize: vertical;
+      }
+
+      button {
+        width: 100%;
+        padding: 12px;
+        background-color: var(--azul-escuro);
+        color: white;
+        font-weight: bold;
+        font-size: 1rem;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      button:hover {
+        background-color: var(--azul-claro);
+      }
+      a {
+        display: block;
+        margin-top: 12px;
+        text-align: center;
+        font-weight: 600;
+        color: var(--azul-escuro);
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+    </style>
   </head>
-  <body class="bg-zinc-900 flex items-center justify-center min-h-screen">
-    <div class="bg-white rounded-xl shadow-lg p-8 w-full max-w-md">
-      <h1 class="text-2xl font-bold text-center mb-6">Cadastrar Projeto</h1>
+  <body>
+    <div class="container">
+      <h1>Cadastrar Projeto</h1>
 
       <form
         id="formProjeto"
         action="http://localhost:3000/projetos"
         method="POST"
         enctype="multipart/form-data"
-        class="space-y-4"
       >
-        <div>
-          <label for="nome" class="block font-medium mb-1"
-            >Nome do Projeto</label
-          >
-          <input
-            type="text"
-            id="nome"
-            name="nome"
-            class="w-full px-4 py-2 bg-blue-100 rounded-md focus:outline-none"
-          />
-        </div>
+        <label for="nome">Nome do Projeto:</label>
+        <input type="text" id="nome" name="nome" required />
 
-        <div>
-          <label for="sobre" class="block font-medium mb-1">Descrição</label>
-          <textarea
-            id="sobre"
-            name="sobre"
-            type="text"
-            rows="3"
-            class="w-full px-4 py-2 bg-blue-100 rounded-md focus:outline-none"
-          ></textarea>
-        </div>
-        <div>
-          <label for="link" class="block font-medium mb-1"
-            >Link do projeto</label
-          >
-          <input
-            type="text"
-            id="link"
-            name="link"
-            class="w-full px-4 py-2 bg-blue-100 rounded-md focus:outline-none"
-          />
-        </div>
+        <label for="sobre">Descrição:</label>
+        <textarea id="sobre" name="sobre" rows="3" required></textarea>
 
-        <div>
-          <label for="foto" class="block font-medium mb-1"
-            >Foto do Projeto</label
-          >
-          <input
-            type="file"
-            id="foto"
-            name="foto"
-            class="w-full px-4 py-2 bg-blue-100 rounded-md focus:outline-none"
-          />
-        </div>
+        <label for="link">Link do projeto:</label>
+        <input
+          type="text"
+          id="link"
+          name="link"
+          required
+          placeholder="Ex: link da página do projeto"
+        />
 
-        <button
-          type="submit"
-          class="w-full bg-blue-600 text-white font-semibold py-2 rounded-md hover:bg-blue-700 transition"
-        >
-          Cadastrar Projeto
-        </button>
+        <label for="foto">Foto do Projeto</label>
+        <input type="file" id="foto" name="foto" accept="image/*" required />
+
+        <button type="submit">Cadastrar Projeto</button>
+        <a href="paineldecontrole.html">Cancelar</a>
       </form>
     </div>
-  </body>
 
-  <script>
-    document
-      .getElementById("formProjeto")
-      .addEventListener("submit", async (e) => {
-        e.preventDefault();
+    <script>
+      document
+        .getElementById("formProjeto")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
 
-        const form = e.target;
-        const formData = new FormData(form);
+          const form = e.target;
+          const formData = new FormData(form);
 
-        try {
-          const response = await fetch("http://localhost:3000/projetos", {
-            method: "POST",
-            body: formData,
-          });
+          try {
+            const response = await fetch("http://localhost:3000/projetos", {
+              method: "POST",
+              body: formData,
+            });
 
-          if (response.ok) {
-            alert("Projeto cadastrado com sucesso!");
-            form.reset(); // limpa os campos
-            // Redireciona ou recarrega
-            window.location.href = window.location.href; // ou: location.reload();
-          } else {
-            const erro = await response.json();
-            alert("Erro ao cadastrar: " + (erro.erro || "Erro desconhecido"));
+            if (response.ok) {
+              alert("Projeto cadastrado com sucesso!");
+              form.reset();
+              window.location.href = window.location.href;
+            } else {
+              const erro = await response.json();
+              alert("Erro ao cadastrar: " + (erro.erro || "Erro desconhecido"));
+            }
+          } catch (err) {
+            console.error(err);
+            alert("Erro na requisição.");
           }
-        } catch (err) {
-          console.error(err);
-          alert("Erro na requisição.");
-        }
-      });
-  </script>
+        });
+    </script>
+  </body>
 </html>

@@ -12,6 +12,7 @@ const PORT = 3000;
 // Habilita o CORS para permitir acesso via fetch de qualquer origem
 app.use(cors());
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use('/uploads', express.static('uploads'));
 
 
 // Configuração do PostgreSQL
@@ -43,9 +44,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 
-app.get('projeto/paginainicial.html', (req, res) => {
-  res.sendFile(path.join(__dirname, 'projeto', 'paginainicial.html'));
-});
+// app.get('paginaprojetos.html', (req, res) => {
+//   res.sendFile(path.join(__dirname, 'projeto', 'paginainicial.html'));
+// });
 
 // Criar pasta de uploads se não existir
 const uploadDir = path.join(__dirname, 'uploads');
@@ -105,11 +106,29 @@ app.get('/salas', async (req, res) => {
     res.status(500).json({ error: 'Erro ao buscar salas' });
   }
 });
+// adicionei essa 
+app.get('/salas/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const result = await pool.query('SELECT * FROM sala WHERE id = $1', [id]);
+    
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: 'Sala não encontrada' });
+    }
+    
+    res.json(result.rows[0]);
+  } catch (error) {
+    console.error('Erro ao buscar sala:', error);
+    res.status(500).json({ error: 'Erro ao buscar sala' });
+  }
+});
+
+// 
 
 app.post('/cadastrar-sala', upload.single('foto'), async (req, res) => {
   try {
     const { nome, localizacao, tipo } = req.body;
-    const fotoPath = req.file ? '/uploads/' + req.file.filename : null;
+    const fotoPath = req.file ? 'uploads/' + req.file.filename : null;
 
     const result = await pool.query(
       'INSERT INTO sala (nome, localizacao, tipo, foto) VALUES ($1, $2, $3, $4) RETURNING *',
@@ -144,6 +163,28 @@ app.delete('/salas/:id', async (req, res) => {
   
 });
 
+app.put('/atualizar-sala/:id', upload.single('foto'), async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { nome, localizacao, tipo } = req.body;
+        let fotoPath = req.body.fotoAtual; // Você pode enviar o caminho atual como campo hidden
+
+        if (req.file) {
+            fotoPath = 'uploads/' + req.file.filename;
+        }
+
+        const result = await pool.query(
+            'UPDATE sala SET nome = $1, localizacao = $2, tipo = $3, foto = COALESCE($4, foto) WHERE id = $5 RETURNING *',
+            [nome, localizacao, tipo, fotoPath, id]
+        );
+
+        res.json(result.rows[0]);
+    } catch (error) {
+        console.error('Erro ao atualizar sala:', error);
+        res.status(500).json({ error: 'Erro ao atualizar sala' });
+    }
+});
+
 // Retorna as salas cadastradas
 app.get('/salas', async (req, res) => {
   try {
@@ -162,18 +203,22 @@ app.post('/login', async (req, res) => {
   const { email, senha } = req.body;
 
   try {
-    const result = await pool.query('SELECT * FROM usuario WHERE email = $1 AND senha = $2', [email, senha]);
+    const result = await pool.query(
+      'SELECT * FROM usuario WHERE email = $1 AND senha = $2',
+      [email, senha]
+    );
 
     if (result.rows.length > 0) {
-      res.redirect('paineldecontrole.html'); // sucesso
+      res.json({ sucesso: true }); // <- sucesso, retorna json
     } else {
-      res.status(401).send('Email ou senha incorretos');
+      res.status(401).json({ erro: "Email ou senha incorretos" }); // <- erro claro
     }
   } catch (error) {
     console.error('Erro no login:', error);
-    res.status(500).send('Erro interno do servidor');
+    res.status(500).json({ erro: "Erro interno do servidor" }); // <- erro do servidor
   }
 });
+
 
 // rotas professores 
 // Rotas de professores
@@ -289,15 +334,24 @@ app.post('/projetos', upload.single('foto'), async (req, res) => {
 
 app.put('/projetos/:id', async (req, res) => {
   const { id } = req.params;
-  const { nome, sobre, foto } = req.body;
+  const { nome, sobre, link } = req.body;
+
   try {
-    const resultado = await pool.query(
-      'UPDATE projeto SET nome = $1, sobre = $2, foto = $3 WHERE id = $4 RETURNING *',
-      [nome, sobre, foto, id]
-    );
-    if (resultado.rows.length === 0) {
+    // Primeiro busca a foto atual do projeto
+    const projetoAtual = await pool.query('SELECT foto FROM projeto WHERE id = $1', [id]);
+    
+    if (projetoAtual.rows.length === 0) {
       return res.status(404).json({ erro: 'Projeto não encontrado' });
     }
+
+    const fotoAtual = projetoAtual.rows[0].foto;
+
+    // Atualiza apenas nome, sobre e link, mantendo a foto existente
+    const resultado = await pool.query(
+      'UPDATE projeto SET nome = $1, sobre = $2, link = $3, foto = $4 WHERE id = $5 RETURNING *',
+      [nome, sobre, link, fotoAtual, id]
+    );
+
     res.json(resultado.rows[0]);
   } catch (err) {
     console.error(err);

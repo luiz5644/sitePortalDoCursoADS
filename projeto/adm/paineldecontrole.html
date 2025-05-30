@@ -1,10 +1,20 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Gerenciador</title>
-    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de controle</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+      rel="stylesheet"
+    />
     <style>
+      * {
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
     
      body {
   margin: 0;
@@ -30,20 +40,20 @@
       .img-ads >img {
         display: flex;
         align-items: center;
-        /* width: 80%; */
+ 
         margin-left: 0px;
         height: 32px;
       }
 
 .main {
   display: flex;
-  margin-top: 60px; /* Altura do header */
+  margin-top: 60px; 
 }
 
 .sidebar {
   width: 200px;
   background-color:rgb(245, 245, 245);
-  height: calc(100vh - 60px); /* altura da tela menos o header */
+  height: calc(100vh - 60px); 
   padding: 10px;
   position: fixed;
   top: 60px;
@@ -52,7 +62,7 @@
 
 .content {
   flex: 1;
-  margin-left: 240px; /* Largura da sidebar */
+  margin-left: 240px; 
   margin-top: -30px;
   /* padding: 5px; */
 }
@@ -87,6 +97,10 @@ button > img{
   width: 170px;
 
 }
+.sidebar >.botao-sair{
+  height: 50px;
+
+}
 .sidebar> .botao-sair:hover{
   background-color: red;
   border-radius: 8px;
@@ -116,9 +130,9 @@ button > img{
     align-items: end;
     gap: 5px; 
 }
-/* Estilização fixa para os botões */
+
 .beditar {
-    background-color: #4CAF50 !important; /* Verde */
+    background-color: #4CAF50 !important; 
     color: white !important;
     border: none;
     padding: 5px 10px;
@@ -128,7 +142,7 @@ button > img{
 }
 
 .bexcluir {
-    background-color: #f44336 !important; /* Vermelho */
+    background-color: #f44336 !important; 
     color: white !important;
     border: none;
     padding: 5px 10px;
@@ -168,18 +182,6 @@ button > img{
   display: none;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
   </style>
   </head>
   
@@ -199,7 +201,7 @@ button > img{
         <button onclick="showSection('salas')"> <img width="30" height="30" src="https://img.icons8.com/ios/50/3053c6/university.png" alt="university"/> Salas</button>
         <button onclick="showSection('usuarios')"><img width="30" height="30" src="https://img.icons8.com/small/32/3053c6/user.png" alt="user"/> Usuários</button>
 
-        <a href="/projeto/paginainicial.html" class="botao-sair" style="display: inline-flex; align-items: center; gap: 4px; text-decoration: none; color: inherit;">
+        <a href="http://127.0.0.1:5500/projeto/paginainicial.html" class="botao-sair" style="display: inline-flex; align-items: center; gap: 4px; text-decoration: none; color: inherit;">
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-log-out-icon lucide-log-out">
     <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
     <polyline points="16 17 21 12 16 7"/>
@@ -218,7 +220,7 @@ button > img{
           <button><a href="cadastroevento.html">+ Novo evento</a></button>
         </div>
         <div class="fundo-card" id="lista-eventos">
-          <!-- Os cards dos eventos serão inseridos aqui via JS -->
+          
         </div>
       </div>
 
@@ -226,7 +228,7 @@ button > img{
         <!-- Projetos -->
         <div id="projetos" class="section hidden">
         <div class="top-bar">
-          <button><a href="cadastroprojetos.html">novo porjeto +</a></button>
+          <button><a href="cadastroprojetos.html">novo projeto +</a></button>
         </div>
         <div class="fundo-card">
    
@@ -275,8 +277,7 @@ button > img{
       carregarSalas();
     }
   }
-
-  // Carrega os eventos do banco
+// funções de evento 
 async function carregarEventos() {
   try {
     const res = await fetch('http://localhost:3000/eventos');
@@ -291,7 +292,7 @@ async function carregarEventos() {
       card.className = 'card';
       card.innerHTML = `
         <strong>${evento.nome}</strong><br>
-        Data: ${new Date(evento.data).toLocaleDateString('pt-BR')}<br>
+        Data: ${evento.data}<br>
         Sobre: ${evento.sobre || 'sem descrição'}
         <button class= "beditar" onclick="editarEvento('${evento.id}', '${evento.nome}', '${evento.data}', '${evento.sobre || ''}')">editar</button>
         <button class= "bexcluir"  onclick="excluirEvento ('${evento.id}')">excluir</button>
@@ -303,7 +304,7 @@ async function carregarEventos() {
   }
 }
 
-// excluir eventos 
+
 async function excluirEvento(id) {
   const confirmar = confirm("Tem certeza que deseja excluir este evento?");
   if (!confirmar) return;
@@ -324,9 +325,32 @@ async function excluirEvento(id) {
     alert('Erro ao excluir evento.');
   }
 }
-// eventos 
-// projetos  
-// Carrega os projetos do banco
+
+function editarEvento(id, nomeAtual, dataAtual, sobreAtual) {
+  const novoNome = prompt("Editar nome do evento:", nomeAtual);
+  const novaData = prompt("Editar data do evento (ex: 20/agosto):", dataAtual);
+  const novoSobre = prompt("Editar descrição do evento:", sobreAtual);
+
+  if (novoNome && novaData) {
+    fetch(`http://localhost:3000/eventos/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        nome: novoNome.trim(),
+        data: novaData.trim(), 
+        sobre: novoSobre?.trim() || ""
+      })
+    })
+    .then(res => {
+      if (!res.ok) throw new Error("Erro ao editar evento");
+      alert("Evento editado com sucesso!");
+      carregarEventos();
+    })
+    .catch(err => alert(err.message));
+  }
+}
+
+// funções de projeto  
 async function carregarProjetos() {
   try {
     const res = await fetch('http://localhost:3000/projetos');
@@ -343,7 +367,8 @@ async function carregarProjetos() {
       card.innerHTML = `
   <strong>${projeto.nome}</strong><br>
   Descrição: ${projeto.sobre || 'sem descrição'}
-  <button class= "beditar" onclick="editarProjeto('${projeto.nome}', '${projeto.sobre}')">editar</button>
+  <button class= "beditar" onclick="editarProjeto('${projeto.id}', '${projeto.nome}', '${projeto.sobre}', '${projeto.link}')">editar</button>
+
   <button class= "bexcluir" onclick="excluirProjeto('${projeto.id}')">excluir</button>
 `;
       container.appendChild(card);
@@ -353,7 +378,6 @@ async function carregarProjetos() {
   }
 }
 
-// excluir projeto 
 async function excluirProjeto(id) {
   const confirmar = confirm("Tem certeza que deseja excluir este projeto?");
   if (!confirmar) return;
@@ -375,17 +399,38 @@ async function excluirProjeto(id) {
   }
 }
 
-// projetos
+function editarProjeto(idProjeto, nomeAtual, sobreAtual, linkAtual) {
+  const novoNome = prompt("Editar nome do projeto:", nomeAtual);
+  if (novoNome === null) return; // Usuário cancelou
 
+  const novoSobre = prompt("Editar descrição do projeto:", sobreAtual || '');
+  const novoLink = prompt("Editar link do projeto:", linkAtual || '');
 
+  fetch(`http://localhost:3000/projetos/${idProjeto}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      nome: novoNome,
+      sobre: novoSobre,
+      link: novoLink
+      // Não enviamos a foto, o backend mantém a existente
+    })
+  })
+  .then(res => {
+    if (!res.ok) throw new Error(res.statusText);
+    return res.json();
+  })
+  .then(() => {
+    alert("Projeto editado com sucesso!");
+    carregarProjetos();
+  })
+  .catch(err => {
+    console.error("Erro ao editar projeto:", err);
+    alert("Erro ao editar projeto: " + err.message);
+  });
+}
 
-
-
-  
-  
-// professores 
-
-// Carrega os professores do banco
+// funções de professor 
 async function carregarProfessores() {
   try {
     const res = await fetch('http://localhost:3000/professores');
@@ -410,7 +455,7 @@ async function carregarProfessores() {
   }
 }
 
-// excluir professores 
+
 async function excluirProfessor(id) {
   const confirmar = confirm("Tem certeza que deseja excluir este professor?");
   if (!confirmar) return;
@@ -431,11 +476,31 @@ async function excluirProfessor(id) {
     alert('Erro ao excluir professor.');
   }
 }
-// professores 
+function editarProfessor(id, nomeAtual, emailAtual, materiaAtual) {
+  const novoNome = prompt("Editar nome do professor:", nomeAtual);
+  const novoEmail = prompt("Editar e-mail do professor:", emailAtual);
+  const novaMateria = prompt("Editar matéria:", materiaAtual);
 
+  if (novoNome) {
+    fetch(`http://localhost:3000/professores/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        nome: novoNome,
+        email: novoEmail,
+        materia: novaMateria
+      })
+    })
+    .then(res => {
+      if (!res.ok) throw new Error("Erro ao editar professor");
+      alert("Professor editado com sucesso!");
+      carregarProfessores();
+    })
+    .catch(err => alert(err.message));
+  }
+}
 
-
-  // Carrega as salas do banco
+// funções de sala 
   async function carregarSalas() {
     try {
       const res = await fetch('http://localhost:3000/salas');
@@ -458,7 +523,6 @@ async function excluirProfessor(id) {
     }
   }
 
-  // Exclui uma sala
   async function excluirSala(id) {
   const confirmacao = confirm("Tem certeza que deseja excluir esta sala?");
   if (confirmacao) {
@@ -475,9 +539,41 @@ async function excluirProfessor(id) {
     }
   }
   }
-  // salas
 
-  // mostrar usuários cadastrados
+async function editarSala(id, nomeAtual, localAtual, tipoAtual, fotoAtual) {
+  // Adicione fotoAtual como parâmetro
+  
+  const novoNome = prompt("Editar nome da sala:", nomeAtual);
+  const novaLocalizacao = prompt("Editar localização:", localAtual);
+  const novoTipo = prompt("Editar tipo da sala: (laboratório/outros)", tipoAtual || '');
+
+  if (novoNome !== null && novaLocalizacao !== null) {
+    try {
+      const response = await fetch(`http://localhost:3000/atualizar-sala/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          nome: novoNome,
+          localizacao: novaLocalizacao,
+          tipo: novoTipo,
+          fotoAtual: fotoAtual // Mantém a foto existente
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error(await response.text());
+      }
+
+      alert("Sala atualizada com sucesso!");
+      carregarSalas();
+    } catch (error) {
+      console.error("Erro ao editar sala:", error);
+      alert(`Erro ao editar sala: ${error.message}`);
+    }
+  }
+}
+
+// fuções de usuário
   async function carregarUsuarios() {
   try {
     const res = await fetch('http://localhost:3000/usuarios');
@@ -534,10 +630,6 @@ async function excluirUsuario(id) {
     alert('Erro ao excluir usuário.');
   }
 }
-
-
-// usuarios 
-  
 
 
 

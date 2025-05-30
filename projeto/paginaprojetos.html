@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,6 +11,81 @@
       rel="stylesheet"
     />
     <style>
+      /* Estilos para o modal */
+      .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(5px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+      }
+
+      .modal-overlay.active {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .modal-content {
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        max-width: 80%;
+        max-height: 80vh;
+        overflow-y: auto;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        transform: scale(0.9);
+        transition: transform 0.3s ease;
+      }
+
+      .modal-overlay.active .modal-content {
+        transform: scale(1);
+      }
+
+      .modal-close {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: var(--azul-claro);
+        color: white;
+        border: none;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 16px;
+      }
+
+      /* Mantenha o truncamento original para o card */
+      .card-content p {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-height: 5.3em;
+        line-height: 1.5em;
+      }
+
+      .ver-mais {
+        color: var(--azul-claro);
+        cursor: pointer;
+        font-size: 14px;
+        margin-top: 5px;
+        display: inline-block;
+      }
+
+      .ver-mais:hover {
+        text-decoration: underline;
+      }
       :root {
         --azul-claro: rgb(48, 83, 198);
         --azul-escuro: rgb(20, 51, 154);
@@ -103,6 +178,9 @@
         grid-template-columns: repeat(3, 1fr);
         gap: 2px;
       }
+      .ver-mais {
+        margin-bottom: 10px;
+      }
 
       .card {
         background-color: white;
@@ -136,8 +214,6 @@
         margin-bottom: 8px;
       }
 
-      
-
       .card-botao-conheça {
         color: white;
         background-color: var(--azul-claro);
@@ -153,7 +229,7 @@
       .card-botao-conheça:hover {
         background-color: var(--azul-escuro);
       }
-      .card-botao-conheça > a{
+      .card-botao-conheça > a {
         color: white;
         text-decoration: none;
       }
@@ -327,20 +403,11 @@
     </div>
 
     <!-- coloca os cards aqui -->
-   <div class="section">
-    <div class="card-container" id="projetos-container">
-      <!-- Os projetos serão carregados aqui dinamicamente -->
-    </div>
-  </div>
-
-        
-
-        
-
-        
+    <div class="section">
+      <div class="card-container" id="projetos-container">
+        <!-- Os projetos serão carregados aqui dinamicamente -->
       </div>
     </div>
-  
 
     <div class="acesso-rapido">
       <h2>Acesso rápido</h2>
@@ -398,7 +465,12 @@
         <img src="imagem/logoads.png" alt="" width="180" />
       </div>
       <div class="coluna">
-        <img src="imagem/logoIFCE.png" alt="" width="180" style="margin-top: -40px;" />
+        <img
+          src="imagem/logoIFCE.png"
+          alt=""
+          width="180"
+          style="margin-top: -40px"
+        />
       </div>
       <div class="coluna">
         <strong>Navegações</strong>
@@ -436,40 +508,123 @@
   <script>
     async function carregarProjetos() {
       try {
-        const response = await fetch('http://localhost:3000/projetos');
-        if (!response.ok) throw new Error('Erro ao carregar projetos');
+        const response = await fetch("http://localhost:3000/projetos");
+        if (!response.ok) throw new Error("Erro ao carregar projetos");
         const projetos = await response.json();
 
-        const container = document.getElementById('projetos-container');
-        container.innerHTML = ''; // Limpa o container
+        const container = document.getElementById("projetos-container");
+        container.innerHTML = "";
 
-        projetos.forEach(projeto => {
-          const projetoCard = `
-            <div class="card">
-              ${projeto.foto ? 
-                `<img src="uploads/${projeto.foto}" alt="${projeto.nome}" class="imagem-projeto">` : 
-                `<img src="imagem/devup projeto.jpg" alt="Imagem padrão" class="imagem-projeto">`
-              }
-              <div class="card-content">
-                <div class="card-title"><h2>${projeto.nome || 'Sem título'}</h2></div>
-                <p>${projeto.sobre || 'Sem descrição'}</p>
-                <button class="card-botao-conheça">
-                  <a href="${projeto.link || '#'}" target="_blank">Conheça o projeto</a>
-                </button>
-              </div>
-            </div>
-          `;
-          container.insertAdjacentHTML('beforeend', projetoCard);
+        // Cria o modal no body
+        document.body.insertAdjacentHTML(
+          "beforeend",
+          `
+      <div class="modal-overlay" id="texto-modal">
+        <div class="modal-content">
+          <button class="modal-close">X</button>
+          <div id="modal-text-content"></div>
+        </div>
+      </div>
+    `
+        );
+
+        const modal = document.getElementById("texto-modal");
+        const modalContent = document.getElementById("modal-text-content");
+        const closeBtn = document.querySelector(".modal-close");
+
+        // Fecha o modal quando clicar no X
+        closeBtn.addEventListener("click", () => {
+          modal.classList.remove("active");
         });
 
+        // Fecha o modal quando clicar fora do conteúdo
+        modal.addEventListener("click", (e) => {
+          if (e.target === modal) {
+            modal.classList.remove("active");
+          }
+        });
+
+        projetos.forEach((projeto) => {
+          const projetoCard = `
+        <div class="card">
+          ${
+            projeto.foto
+              ? `<img src="uploads/${projeto.foto}" alt="${projeto.nome}" class="imagem-projeto">`
+              : `<img src="imagem/devup projeto.jpg" alt="Imagem padrão" class="imagem-projeto">`
+          }
+          <div class="card-content">
+            <div class="card-title"><h2>${
+              projeto.nome || "Sem título"
+            }</h2></div>
+            <p>${projeto.sobre || "Sem descrição"}</p>
+            <span class="ver-mais" data-text="${
+              projeto.sobre || "Sem descrição"
+            }">Ver mais</span>
+            <button class="card-botao-conheça">
+              <a href="${
+                projeto.link || "#"
+              }" target="_blank">Conheça o projeto</a>
+            </button>
+          </div>
+        </div>
+      `;
+          container.insertAdjacentHTML("beforeend", projetoCard);
+        });
+
+        // Adiciona os event listeners para os botões "Ver mais"
+        document.querySelectorAll(".ver-mais").forEach((botao) => {
+          botao.addEventListener("click", function () {
+            const textoCompleto = this.getAttribute("data-text");
+            modalContent.innerHTML = `<h2>Sobre o projeto: ${
+              this.closest(".card").querySelector(".card-title h2").textContent
+            }</h2>
+
+                                <p>${textoCompleto}</p>`;
+            modal.classList.add("active");
+          });
+        });
       } catch (erro) {
-        console.error('Erro ao carregar projetos:', erro);
-        document.getElementById('projetos-container').innerHTML = 
+        console.error("Erro ao carregar projetos:", erro);
+        document.getElementById("projetos-container").innerHTML =
           '<p class="erro-carregamento">Erro ao carregar projetos. Tente novamente mais tarde.</p>';
       }
     }
+    // async function carregarProjetos() {
+    //   try {
+    //     const response = await fetch('http://localhost:3000/projetos');
+    //     if (!response.ok) throw new Error('Erro ao carregar projetos');
+    //     const projetos = await response.json();
+
+    //     const container = document.getElementById('projetos-container');
+    //     container.innerHTML = ''; // Limpa o container
+
+    //     projetos.forEach(projeto => {
+    //       const projetoCard = `
+    //         <div class="card">
+    //           ${projeto.foto ?
+    //             `<img src="uploads/${projeto.foto}" alt="${projeto.nome}" class="imagem-projeto">` :
+    //             `<img src="imagem/devup projeto.jpg" alt="Imagem padrão" class="imagem-projeto">`
+    //           }
+    //           <div class="card-content">
+    //             <div class="card-title"><h2>${projeto.nome || 'Sem título'}</h2></div>
+    //             <p>${projeto.sobre || 'Sem descrição'}</p>
+    //             <button class="card-botao-conheça">
+    //               <a href="${projeto.link || '#'}" target="_blank">Conheça o projeto</a>
+    //             </button>
+    //           </div>
+    //         </div>
+    //       `;
+    //       container.insertAdjacentHTML('beforeend', projetoCard);
+    //     });
+
+    //   } catch (erro) {
+    //     console.error('Erro ao carregar projetos:', erro);
+    //     document.getElementById('projetos-container').innerHTML =
+    //       '<p class="erro-carregamento">Erro ao carregar projetos. Tente novamente mais tarde.</p>';
+    //   }
+    // }
 
     // Carrega os projetos quando a página é aberta
-    document.addEventListener('DOMContentLoaded', carregarProjetos);
+    document.addEventListener("DOMContentLoaded", carregarProjetos);
   </script>
 </html>
