@@ -28,14 +28,17 @@
       }
 
 .header {
-        background-color: white;
-        width: 100%;
-        height: 60px;
-        display: flex;
-        align-items: center;
-        padding: 0 20px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      }
+  background-color: white;
+  width: 100%;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  position: fixed; /* Mantém fixo no topo */
+  top: 0;           /* Posiciona no topo da janela */
+  z-index: 1000;    /* Garante que fique acima dos outros elementos */
+}
 
       .img-ads >img {
         display: flex;
@@ -47,7 +50,7 @@
 
 .main {
   display: flex;
-  margin-top: 60px; 
+  margin-top: 100px; 
 }
 
 .sidebar {
@@ -131,12 +134,18 @@ button > img{
     gap: 5px; 
 }
 
+.botoes {
+    display: flex;
+    justify-content: flex-end; /* alinha os botões à direita */
+    margin-top: 0px;
+}
+
 .beditar {
     background-color: #4CAF50 !important; 
     color: white !important;
     border: none;
     padding: 5px 10px;
-    margin: 5px;
+    margin-left: 5px;
     border-radius: 3px;
     cursor: pointer;
 }
@@ -146,7 +155,7 @@ button > img{
     color: white !important;
     border: none;
     padding: 5px 10px;
-    margin: 5px;
+    margin-left: 5px;
     border-radius: 3px;
     cursor: pointer;
 }
@@ -221,14 +230,14 @@ button > img{
         </div>
         <div class="fundo-card" id="lista-eventos">
           
-        </div>
+      </div>
       </div>
 
 
         <!-- Projetos -->
         <div id="projetos" class="section hidden">
         <div class="top-bar">
-          <button><a href="cadastroprojetos.html">novo projeto +</a></button>
+          <button><a href="cadastroprojetos.html">Novo projeto +</a></button>
         </div>
         <div class="fundo-card">
    
@@ -294,8 +303,10 @@ async function carregarEventos() {
         <strong>${evento.nome}</strong><br>
         Data: ${evento.data}<br>
         Sobre: ${evento.sobre || 'sem descrição'}
+        <div class="botoes">
         <button class= "beditar" onclick="editarEvento('${evento.id}', '${evento.nome}', '${evento.data}', '${evento.sobre || ''}')">editar</button>
         <button class= "bexcluir"  onclick="excluirEvento ('${evento.id}')">excluir</button>
+        </div>
       `;
       container.appendChild(card);
     });
@@ -367,9 +378,10 @@ async function carregarProjetos() {
       card.innerHTML = `
   <strong>${projeto.nome}</strong><br>
   Descrição: ${projeto.sobre || 'sem descrição'}
+  <div class="botoes">
   <button class= "beditar" onclick="editarProjeto('${projeto.id}', '${projeto.nome}', '${projeto.sobre}', '${projeto.link}')">editar</button>
-
   <button class= "bexcluir" onclick="excluirProjeto('${projeto.id}')">excluir</button>
+  </div>
 `;
       container.appendChild(card);
     });
@@ -445,8 +457,10 @@ async function carregarProfessores() {
         <strong>${prof.nome}</strong><br>
         Email: ${prof.email || 'não informado'}<br>
         Matéria: ${prof.materia || 'não informada'}
+        <div class="botoes">
         <button class= "beditar"  onclick="editarProfessor('${prof.id}', '${prof.nome}', '${prof.email}', '${prof.materia}')">editar</button>
         <button class= "bexcluir" onclick="excluirProfessor('${prof.id}')">excluir</button>
+        </div>
       `;
       lista.appendChild(card);
     });
@@ -513,8 +527,10 @@ function editarProfessor(id, nomeAtual, emailAtual, materiaAtual) {
         card.className = 'card';
         card.innerHTML = `
           <strong>${sala.nome}</strong> - ${sala.localizacao}
+          <div class="botoes">
           <button class= "beditar"  onclick="editarSala('${sala.id || sala._id}', '${sala.nome}', '${sala.localizacao}')">editar</button>
           <button class= "bexcluir"  onclick="excluirSala('${sala.id || sala._id}')">excluir</button>
+          </div>
         `;
         lista.appendChild(card);
       });

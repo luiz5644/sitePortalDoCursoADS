@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -19,7 +19,6 @@
         --cinza-claro: rgb(220, 228, 235);
         --cinza-escuro: rgb(52, 58, 64);
       }
-
       * {
         margin: 0;
         padding: 0;
@@ -71,7 +70,6 @@
         height: 100%;
         object-fit: cover;
       }
-
       .imagem-header-texto {
         position: absolute;
         top: 50%;
@@ -124,11 +122,9 @@
         padding: 5px;
         text-align: center;
       }
-
       .botao-container:hover {
         background-color: var(--azul-escuro);
       }
-
       .botao-container > a {
         color: white;
       }
@@ -142,7 +138,6 @@
         gap: 20px;
         align-items: stretch;
       }
-
       .icon {
         margin-right: 10px;
         margin-top: 15px;
@@ -191,7 +186,6 @@
         font-size: 16px;
         cursor: pointer;
       }
-
       .botãoaparece:hover {
         background-color: var(--azul-escuro);
       }
@@ -206,6 +200,7 @@
         justify-content: space-between;
         background-color: #3053c6;
         border-radius: 5px;
+        padding: 40px;
         color: white;
         max-width: 90%;
         margin: 20px auto;
@@ -215,7 +210,7 @@
 
       .texto {
         width: 50%;
-        padding: 40px;
+        padding-right: 40px;
         overflow: auto;
         max-height: 500px;
       }
@@ -224,32 +219,20 @@
         padding-bottom: 10px;
       }
 
-      .texto p {
-        text-align: left;
-        padding-bottom: 20px;
-      }
-
       .imagem-projetos-desktop {
         width: 50%;
-        min-height: 400px;
-        /* <-- aumenta a área visível */
         background-color: transparent;
         display: flex;
         align-items: center;
         justify-content: center;
         border-radius: 5px;
-        position: relative;
-        overflow: hidden;
       }
 
       .imagem-projetos-desktop img {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        border-radius: 0;
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+        border-radius: 5px;
       }
 
       .lista-projetos-botao {
@@ -308,11 +291,9 @@
         .imagem-header {
           width: 100%;
         }
-
         .img-ads {
           margin-left: 5px;
         }
-
         .container-botoes {
           display: grid;
           grid-template-columns: repeat(4, 1fr);
@@ -321,7 +302,6 @@
           overflow-wrap: break-word;
           word-wrap: break-word;
         }
-
         .botao-container > a {
           color: white;
         }
@@ -371,34 +351,34 @@
         .projetos-mobile {
           display: grid;
           grid-column: auto;
-          height: auto;
+          height: 500px;
           align-items: center;
           background-color: #3053c6;
+          padding: 20px;
           color: white;
           width: 100%;
           margin: auto;
-          height: auto;
+          margin-bottom: 20px;
+          gap: 20px;
         }
 
         .texto-mobile > h2 {
-          margin-top: 32px;
-          padding-bottom: 16px;
+          padding-bottom: 10px;
           text-align: center;
-        }
-
-        .texto-mobile p {
-          padding: 20px;
-          text-align: center;
-          font-size: 16px;
-          margin-bottom: 32px;
         }
 
         .imagem-projetos-mobile {
-          background-image: url("imagem/imagem-projetos-mobile.png");
-          background-size: cover;
-          background-position: top center;
-          height: 200px;
-          width: 100%;
+          width: 50%;
+          background-color: transparent;
+          display: block;
+          margin: auto;
+          border-radius: 5px;
+        }
+
+        .imagem-projetos-mobile img {
+          max-width: 100%;
+          max-height: 100%;
+          border-radius: 5px;
         }
 
         .lista-projetos-botao-mobile {
@@ -412,7 +392,6 @@
           font-size: 16px;
           cursor: pointer;
         }
-
         .lista-projetos-botao-mobile > a:hover {
           text-decoration: none;
         }
@@ -442,7 +421,6 @@
           width: 100%;
           text-align: center;
         }
-
         .container-botoes > button {
           height: 80px;
         }
@@ -453,7 +431,6 @@
           margin: 0;
           height: 70px;
         }
-
         .botao-container > p {
           font-size: 14px;
         }
@@ -465,14 +442,12 @@
         .lista-projetos-botao {
           display: none;
         }
-
         a:hover {
           text-decoration: none;
         }
       }
     </style>
   </head>
-
   <body>
     <div class="header">
       <div class="img-ads">
@@ -526,10 +501,7 @@
         <p>Matriz curricular</p>
       </button>
 
-      <button
-        class="botao-container"
-        onclick="location.href='calendariodeeventos.html'"
-      >
+      <button class="botao-container" onclick="location.href='calendariodeeventos.html'">
         <img
           width="20"
           height="20"
@@ -589,29 +561,24 @@
       </div>
 
       <div class="imagem-projetos-desktop">
-        <img
-          src="imagem/imagem-projetos-dec.png"
-          alt="background em azul com ícones"
-        />
+        <img src="imagem/aulaifce.jpeg" alt="Foto dos alunos em sala de aula" />
       </div>
     </div>
 
     <div class="projetos-mobile">
       <div class="texto-mobile">
         <h2>Nossos projetos</h2>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo esse
-          omnis recusandae veritatis fugit, enim necessitatibus tempora placeat
-          deleniti ad! Consectetur quos sunt eum? Praesentium eveniet non
-          officiis quo aut.
-        </p>
       </div>
 
       <div class="imagem-projetos-mobile">
-        <button class="lista-projetos-botao-mobile">
-          <a href="paginaprojetos.html">Lista de Projetos</a>
-        </button>
+        <img
+          src="imagem/testeprojetosimg.jpg"
+          alt="Foto dos alunos em sala de aula"
+        />
       </div>
+      <button class="lista-projetos-botao-mobile">
+        <a href="paginaprojetos.html">Lista de Projetos</a>
+      </button>
     </div>
 
     <div class="footer">
@@ -619,12 +586,7 @@
         <img src="imagem/logoads.png" alt="" width="180" />
       </div>
       <div class="coluna">
-        <img
-          src="imagem/logoIFCE.png"
-          alt=""
-          width="180"
-          style="margin-top: -40px"
-        />
+        <img src="imagem/logoIFCE.png" alt="" width="180"   style="margin-top: -40px;"/>
       </div>
       <div class="coluna">
         <strong>Navegações</strong>
