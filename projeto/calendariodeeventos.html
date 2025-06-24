@@ -78,10 +78,14 @@
         color: white;
         padding: 10px;
         border-radius: 5px;
-        text-align: center;
+        display: flex;
+        align-items: center;
+  justify-content: center;
         width: 100px;
+        height: 70px;
         margin-right: 20px;
         font-size: 12px;
+        
       }
 
       .data .dia {
@@ -178,6 +182,11 @@
       a:hover {
         text-decoration: underline;
       }
+      .sobre{
+        max-width: 85%; /* ou o valor que você quiser */
+  overflow-wrap: break-word; /* permite quebrar palavras longas */
+  /* margin-bottom: 10px; */
+      }
 
       @media (max-width: 768px) {
         .img-ads {
@@ -230,7 +239,8 @@
   <body>
     <div class="header">
       <div class="img-ads">
-        <img src="imagem/logoads.png" alt="Logo ADS" />
+        <a href="http://127.0.0.1:5500/projeto/paginainicial.html"><img src="imagem/logoads.png" alt="Logo ADS" /></a>
+        
       </div>
     </div>
 

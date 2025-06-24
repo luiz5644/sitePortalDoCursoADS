@@ -315,6 +315,10 @@
       a:hover {
         text-decoration: underline;
       }
+      .texto-sobre {
+        text-align: justify;
+        overflow-wrap: break-word;
+      }
 
       @media (max-width: 1100px) {
         .card {
@@ -390,12 +394,14 @@
   <body>
     <div class="header">
       <div class="img-ads">
-        <img src="imagem/logoads.png" alt="Logo ADS" />
+        <a href="http://127.0.0.1:5500/projeto/paginainicial.html"
+          ><img src="imagem/logoads.png" alt="Logo ADS"
+        /></a>
       </div>
     </div>
 
     <div class="imagem-header">
-      <img src="/public/imagem/fundo preto (1).png" alt="Imagem" />
+      <img src="imagem/bannerdois.jpg" alt="Imagem" />
 
       <div class="imagem-header-texto">
         <div class="texto-centralizado">Projetos</div>
@@ -579,7 +585,9 @@
               this.closest(".card").querySelector(".card-title h2").textContent
             }</h2>
 
-                                <p>${textoCompleto}</p>`;
+                                <div class="texto-sobre">
+  <p>${textoCompleto}</p>
+</div>`;
             modal.classList.add("active");
           });
         });

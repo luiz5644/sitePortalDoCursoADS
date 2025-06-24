@@ -119,8 +119,12 @@
       .card-docs {
         background-color: rgb(255, 255, 255);
         border-radius: 10px;
-        padding: 15px;
+        padding: 25px;
         height: auto;
+        margin-top: 15px;
+      }
+      .card-docs > p {
+        text-align: justify;
       }
       .botao-docs {
         border: none;
@@ -139,6 +143,7 @@
         background-color: #f5f5f5;
         padding: 20px;
         border-radius: 8px;
+        /* height: 415px; */
       }
 
       .contatos h2 {
@@ -149,8 +154,9 @@
       .card-cont {
         background-color: rgb(255, 255, 255);
         border-radius: 10px;
-        padding: 15px;
+        padding: 25px;
         height: auto;
+        margin-top: 15px;
       }
 
       .acesso-rapido {
@@ -275,6 +281,9 @@
           max-width: 300px;
           align-items: center;
         }
+        .contatos {
+          height: auto;
+        }
         a:hover {
           text-decoration: none;
         }
@@ -284,12 +293,13 @@
   <body>
     <div class="header">
       <div class="img-ads">
-        <img src="imagem/logoads.png" alt="Logo ADS" />
+        <a href="http://127.0.0.1:5500/projeto/paginainicial.html"><img src="imagem/logoads.png" alt="Logo ADS" /></a>
+        
       </div>
     </div>
 
     <div class="imagem-header">
-      <img src="/public/imagem/fundo preto (1).png" alt="Imagem" />
+      <img src="imagem/bannerdois.jpg" alt="Imagem" />
 
       <div class="imagem-header-texto">
         <div class="texto-centralizado">Documentos <br />& Contatos</div>
@@ -301,20 +311,53 @@
         <h2>Documentos</h2>
         <div class="card-docs">
           <p>
-            <strong>PCC</strong><br />
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur
-            illo soluta doloribus animi placeat molestiae. Assumenda maxime
-            iure,
+            <strong>PPC</strong><br />
+            O PPC é o documento que organiza e define tudo sobre um curso em uma
+            instituição de ensino. Ele descreve os objetivos, conteúdos,
+            metodologias, avaliação, carga horária e competências que o aluno
+            deve desenvolver e adquirir.
           </p>
-          <button class="botao-docs">Acessar</button>
+          <a
+            href="https://ifce.edu.br/tabuleirodonorte/campus_tabuleiro/cursos/superior/tecnologico/analise-e-desenvolvimento-de-sistemas/pdfs/projeto-pedagogico-ads/@@download/file/PPC%20ADS.pdf "
+            target="_blank"
+          >
+            <button class="botao-docs">Baixar PPC</button>
+          </a>
+        </div>
+        <div class="card-docs">
+          <p>
+            <strong>ROD</strong><br />
+            Regulamento de Organização Didática. É um documento que estabelece
+            as normas e diretrizes para o funcionamento dos cursos, abrangendo
+            aspectos pedagógicos, currículos, avaliações e outras questões
+            acadêmicas.
+          </p>
+          <a
+            href="https://ifce.edu.br/instituto/documentos-institucionais/rod09_10_2017.pdf"
+            target="_blank"
+          >
+            <button class="botao-docs">Acessar ROD</button>
+          </a>
         </div>
       </div>
       <div class="contatos">
         <h2>Contatos</h2>
         <div class="card-cont">
           <p>
-            <strong>CCA - Controle Acadêmico</strong
+            <strong>CAE - Coordenação de Assistência Estudantil </strong
+            ><br />cae.tabuleiro@ifce.edu.br
+          </p>
+        </div>
+        <div class="card-cont">
+          <p>
+            <strong>CCA - Coordenação de Assistência Estudantil </strong
             ><br />cca.tabuleiro@ifce.edu.br
+          </p>
+        </div>
+        <div class="card-cont">
+          <p>
+            <strong>Coordenador do curso - Jarbas Nunes Vidal Filho </strong
+            ><br />jarbas.vidal@ifce.edu.br
           </p>
         </div>
       </div>
@@ -369,7 +412,12 @@
         <img src="imagem/logoads.png" alt="" width="180" />
       </div>
       <div class="coluna">
-        <img src="imagem/logoIFCE.png" alt="" width="180" style="margin-top: -40px;" />
+        <img
+          src="imagem/logoIFCE.png"
+          alt=""
+          width="180"
+          style="margin-top: -40px"
+        />
       </div>
       <div class="coluna">
         <strong>Navegações</strong>
